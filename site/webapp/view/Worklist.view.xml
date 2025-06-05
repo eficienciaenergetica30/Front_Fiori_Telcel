@@ -1,0 +1,154 @@
+<mvc:View
+    controllerName="globalhitss.ee.site.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+    <App id="App">
+        <Page id="Page" title="{i18n>worklistTitle}">
+            <FlexBox id="FlexBox" 
+                direction="Row"
+                justifyContent="SpaceAround"
+                alignItems="Center"
+                wrap="Wrap">
+                <Title
+                    id="tableHeader"
+                    text="{worklistView>/worklistTableTitle}"
+                    level="H3"/>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                    <Button id="_IDGenButton1" icon="sap-icon://write-new" text="Crear Nuevo Sitio" type="Transparent" press=".onCreate"/>
+                <SearchField
+                    id="searchFieldName"
+                    placeholder="{i18n>worklistSearchName}"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    search=".onSearchName">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchFieldBusinessUnit"
+                    placeholder="{i18n>worklistSearchCompany}"
+                    tooltip="{i18n>worklistSearchCompanyTooltip}"
+                    search=".onSearchBusinessUnit">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData4"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchFieldFormat"
+                    placeholder="{i18n>worklistSearchFormat}"
+                    tooltip="{i18n>worklistSearchFormatTooltip}"
+                    search=".onSearchFormat">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchCostCenter"
+                    placeholder="{i18n>worklistSearchCostCenter}"
+                    tooltip="{i18n>worklistSearchCostCenterTooltip}"
+                    search=".onSearchCostCenter">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <Switch 
+                    id="deleteRecords" 
+                    tooltip="{i18n>deleteRecords}" 
+                    change="handleChangeSwitch">
+                </Switch>
+                <!-- <SearchField
+                    id="searchFieldRPU"
+                    placeholder ="Búsqueda por RPU"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    search=".onSearchRPU">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchFieldState"
+                    placeholder ="Búsqueda por estado"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    search=".onSearchState">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData3"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField> -->
+            </FlexBox>
+            <Table
+                id="table"
+                width="auto"
+                items="{
+                    path: 'Sites>/',
+                    sorter: {
+                        path: 'name',
+                        descending: false
+                    }
+                }"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                growingThreshold="20"
+                updateFinished=".onUpdateFinished">
+
+                <columns>
+                    <Column id="nameColumn">
+                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+                    </Column>
+                     <Column id="businessUnitColumn">
+                        <Text text="{i18n>businessUnitColumnTitle}" id="businessUnitColumnTitle"/>
+                    </Column>
+                    <Column id="formatColumn">
+                        <Text text="{i18n>tableFormatColumnTitle}" id="formatColumnTitle"/>
+                    </Column>
+                    <Column id="cecoColumn">
+                        <Text text="{i18n>tableCeCoColumnTitle}" id="cecoColumnTitle"/>
+                    </Column>
+                    <Column id="rpuColumn">
+                        <Text text="{i18n>tableRPUColumnTitle}" id="rpuColumnTitle"/>
+                    </Column>
+                    <Column id="stateColumn">
+                        <Text text="{i18n>tableStateColumnTitle}" id="stateColumnTitle"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1"
+                        type="Navigation"
+                        press=".onPress">
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier1"
+                                title="{Sites>name}"/>
+                             <ObjectIdentifier id="_IDGenObjectIdentifier2"
+                                title="{Sites>businessUnit}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier3"
+                                title="{Sites>format}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier4"
+                                title="{Sites>costCenter}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier5"
+                                title="{Sites>RPU}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier6"
+                                title="{Sites>address/state}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Page>
+    </App>
+
+</mvc:View>

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.scp/
+.env
+Makefile*.mta
+mta-*
+resources
+mta_archives
+archive.zip
+.*_mta_build_tmp

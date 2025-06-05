@@ -1,0 +1,619 @@
+<mvc:View height="100%" controllerName="globalhitss.ee.site.controller.Wizard"
+xmlns:form="sap.ui.layout.form"
+xmlns:core="sap.ui.core"
+xmlns:u="sap.ui.unified"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m">
+<NavContainer id="wizardNavContainer">
+<pages>
+    <Page id="wizardContentPage" showHeader="true">
+    <content>
+        <Wizard 
+            id="CreateSiteWizard"   
+            class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+            complete="wizardCompletedHandler">
+            <WizardStep 
+                id="CompanyStep" 
+                title="{i18n>companyStep}"
+                validated="false"
+                activate="stepOneValidation">
+                <MessageStrip id="_IDGenMessageStrip1" class="sapUiSmallMarginBottom" text="{i18n>companyMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm1_1" editable="true">
+                <Label id="companyNameLabel" text="{i18n>companyName}"/>
+                <ComboBox
+                	showSecondaryValues= "true"
+                    id="companyComboBox"
+                    required="true"
+                    valueState="{/companyState}"
+                    valueStateText="{i18n>companyStateText}"
+                    items="{ path: '/CompanyCollection' }"
+                    placeholder="{i18n>companyPlaceHolder}"
+                    change="stepOneValidation">
+                    <core:ListItem id="_IDGenListItemCompW" key="{ID}" text="{FriendlyName}"  additionalText = "{BusinessName}" />
+                </ComboBox>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="SiteInfoStep" 
+                title="{i18n>siteInfoStep}"
+                validated="false"
+                activate="stepTwoValidation">
+                <MessageStrip id="_IDGenMessageStrip2" class="sapUiSmallMarginBottom" text="{i18n>siteInfoMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm2_2" editable="true">
+                <Label id="siteNameLabel" text="{i18n>siteName}"/>
+                <Input
+                    id="siteNameInput"
+                    required="true"
+                    valueState="{/siteNameState}"
+                    valueStateText="{i18n>siteNameStateText}"
+                    placeholder="{i18n>siteNamePlaceHolder}"
+                    liveChange="stepTwoValidation">
+		        </Input>
+                <Label id="siteTypeLabel" text="{i18n>siteType}"/>
+                <ComboBox
+                	showSecondaryValues= "true"
+                    id="siteTypeComboBox"
+                    required="true"
+                    valueState="{/siteTypeState}"
+                    valueStateText="{i18n>companyStateText}"
+                    items="{ path: '/SiteTypeCollection' }"
+                    placeholder="{i18n>siteTypePlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteType" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="siteBusinessUnitLabel" text="{i18n>siteBusinessUnit}"/>
+                <ComboBox
+                	id="siteBusinessUnitComboBox"
+                    required="true"
+                    valueState="{/siteBusinessUnitState}"
+                    valueStateText="{i18n>siteBusinessUnitStateText}"
+                    items="{ path: '/SiteBusinessUnitCollection' }"
+                    placeholder="{i18n>siteBusinessUnitPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteBusinessUnit" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="siteFormatLabel" text="{i18n>siteFormat}"/>
+                <ComboBox
+                	id="siteFormatComboBox"
+                    required="true"
+                    valueState="{/siteFormatState}"
+                    valueStateText="{i18n>siteFormatStateText}"
+                    items="{ path: '/SiteFormatCollection' }"
+                    placeholder="{i18n>siteFormatPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteFormat" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="siteRPULabel" text="{i18n>siteRPU}"/>
+                <Input
+                    id="siteRPUInput"
+                    required="true"
+                    type="Text"
+                    valueState="{/siteRPUState}"
+                    valueStateText="{i18n>siteRPUStateText}"
+                    placeholder="{i18n>siteRPUPlaceHolder}"
+                    liveChange="stepTwoValidation">
+                </Input>
+                <Label id="siteDivisionLabel" text="{i18n>division}"/>
+                <ComboBox
+                	id="siteDivisionComboBox"
+                    required="true"
+                    valueState="{/siteDivisionState}"
+                    valueStateText="{i18n>siteDivisionStateText}"
+                    items="{ path: '/SiteDivisionCollection' }"
+                    placeholder="{i18n>siteDivisionPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteDivision" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="siteFareLabel" text="{i18n>fare}"/>
+                <Input
+                    id="siteFareInput"
+                    type="Text"
+                    placeholder="{i18n>siteFarePlaceHolder}">
+                </Input>
+                <Label id="siteRegionLabel" text="{i18n>region}"/>
+                <ComboBox
+                	id="siteRegionComboBox"
+                    required="true"
+                    valueState="{/siteRegionState}"
+                    valueStateText="{i18n>siteRegionStateText}"
+                    items="{ path: '/SiteRegionCollection',
+                            sorter: {
+                                path: 'Region',
+                                descending: false
+                            } }"
+                    placeholder="{i18n>siteRegionPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteRegion" key="{ID}" text="{Region}"/>
+                </ComboBox>
+                <Label id="siteCostCenterLabel" text="{i18n>siteCostCenter}"/>
+                <Input
+                    id="siteCostCenterInput"
+                    required="true"
+                    type="Number"
+                    valueState="{/siteCostCenterState}"
+                    valueStateText="{i18n>siteCostCenterStateText}"
+                    placeholder="{i18n>siteCostCenterPlaceHolder}"
+                    liveChange="stepTwoValidation">
+		        </Input>
+                <Label id="siteCostCenterEgLabel" text="{i18n>siteCostCenterEg}"/>
+                <Input
+                    id="siteCostCenterEgInput"
+                    required="true"
+                    type="Number"
+                    valueState="{/siteCostCenterEgState}"
+                    valueStateText="{i18n>siteCostCenterEgStateText}"
+                    placeholder="{i18n>siteCostCenterEgPlaceHolder}"
+                    liveChange="stepTwoValidation">
+		        </Input>
+                <Label id="timeZoneLabel" text="{i18n>timeZone}"/>
+                <ComboBox
+                    id="timeZoneComboBox"
+                    required="false"
+                    valueState="{/timeZoneState}"
+                    placeholder="{i18n>timeZonePlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:Item id="_IDGenItem1" key="UTC5" text="(UTC-05:00)"/>
+                    <core:Item id="_IDGenItem2" key="UTC6" text="(UTC-06:00)"/>
+                    <core:Item id="_IDGenItem3" key="UTC7" text="(UTC-07:00)"/>
+                    <core:Item id="_IDGenItem4" key="UTC8" text="(UTC-08:00)"/>
+                    <core:Item id="_IDGenItem5" key="UTC9" text="(UTC-09:00)"/>
+                </ComboBox>
+                <Label id="openHourLabel" text="{i18n>openHour}"/>
+                <ComboBox
+                    id="openHourComboBox"
+                    required="false"
+                    valueState="{/openHourState}"
+                    placeholder="{i18n>openHourPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:Item id="_IDGenItem6" key="7" text="07:00"/>
+                    <core:Item id="_IDGenItem7" key="730" text="07:30"/>
+                    <core:Item id="_IDGenItem8" key="8" text="08:00"/>
+                    <core:Item id="_IDGenItem9" key="830" text="08:30"/>
+                    <core:Item id="_IDGenItem10" key="9" text="09:00"/>
+                    <core:Item id="_IDGenItem11" key="930" text="09:30"/>
+                    <core:Item id="_IDGenItem12" key="10" text="10:00"/>
+                    <core:Item id="_IDGenItem13" key="1030" text="10:30"/>
+                    <core:Item id="_IDGenItem14" key="11" text="11:00"/>
+                    <core:Item id="_IDGenItem15" key="1130" text="11:30"/>
+                    <core:Item id="_IDGenItem16" key="12" text="12:00"/>
+                </ComboBox>
+                <Label id="closeHourLabel" text="{i18n>closeHour}"/>
+                <ComboBox
+                    id="closeHourComboBox"
+                    required="false"
+                    valueState="{/closeHourState}"
+                    placeholder="{i18n>closeHourPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:Item id="_IDGenItem17" key="18" text="18:00"/>
+                    <core:Item id="_IDGenItem18" key="1830" text="18:30"/>
+                    <core:Item id="_IDGenItem19" key="19" text="19:00"/>
+                    <core:Item id="_IDGenItem20" key="1930" text="19:30"/>
+                    <core:Item id="_IDGenItem21" key="20" text="20:00"/>
+                    <core:Item id="_IDGenItem22" key="2030" text="20:30"/>
+                    <core:Item id="_IDGenItem23" key="21" text="21:00"/>
+                    <core:Item id="_IDGenItem24" key="2130" text="21:30"/>
+                    <core:Item id="_IDGenItem25" key="22" text="22:00"/>
+                    <core:Item id="_IDGenItem26" key="2230" text="22:30"/>
+                    <core:Item id="_IDGenItem27" key="23" text="23:00"/>
+                </ComboBox>
+                <Label id="siteStatusLabel" text="{i18n>status}"/>
+                <ComboBox
+                	id="siteStatusComboBox"
+                    required="true"
+                    valueState="{/siteStatusState}"
+                    valueStateText="{i18n>siteStatusStateText}"
+                    items="{ path: '/SiteStatusCollection' }"
+                    placeholder="{i18n>siteStatusPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteStatus" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="siteContractedDemandLabel" text="{i18n>contractedDemand}"/>
+                <Input
+                    id="siteContractedDemandInput"
+                    required="false"
+                    type="Number"
+                    valueState="{/siteContractedDemandState}"
+                    valueStateText="{i18n>siteContractedDemandStateText}"
+                    placeholder="{i18n>siteContractedDemandPlaceHolder}"
+                    liveChange="stepTwoValidation">
+                </Input>
+                <Label id="siteCutoffDateLabel" text="{i18n>cutoffDate}"/>
+                <Input
+                    id="siteCutoffDateInput"
+                    required="false"
+                    type="Text"
+                    placeholder="{i18n>siteCutoffDatePlaceHolder}">
+                </Input>
+                <Label id="siteMultiplierLabel" text="{i18n>multiplier}"/>
+                <Input
+                    id="siteMultiplierInput"
+                    type="Text"
+                    placeholder="{i18n>siteMultiplierPlaceHolder}">
+                </Input>
+                <Label id="siteManagerLabel" text="{i18n>manager}"/>
+                <ComboBox
+                	id="siteManagerComboBox"
+                    required="true"
+                    valueState="{/siteManagerState}"
+                    valueStateText="{i18n>siteManagerStateText}"
+                    items="{ path: '/SiteManagerCollection',
+                            sorter: { path: 'Name' } }"
+                    placeholder="{i18n>siteManagerPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItemSiteManager" key="{ID}" text="{Name}"/>
+                </ComboBox>
+                <Label id="_IDGenLabelconstructedArea" text="{i18n>constructedAreaLabel}"/>
+                <Input id="constructedAreaInput" type="Number" placeholder="{i18n>constructedAreaPlaceHolder}"/>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="AddressStep" 
+                title="{i18n>AddressStep}"
+                validated="false"
+                activate="stepThreeValidation">
+                <MessageStrip 
+                    id="_IDGenMessageStrip3"
+                    class="sapUiSmallMarginBottom" 
+                    text="{i18n>addressSiteMessage}" 
+                    showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm1" editable="true">
+                <Label id="_IDGenLabel2" text="{i18n>countryLabel}" required="true"/>
+                <ComboBox
+                	showSecondaryValues= "true"
+                    id="countryComboBox"
+                    required="true"
+                    valueState="{/countryState}"
+                    items="{ path: '/CountryCollection' }"
+                    placeholder="{i18n>countryPlaceHolder}"
+                    change="stepThreeValidation">
+                    <core:ListItem id="_IDGenListItem1" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabelState" text="{i18n>stateLabel}" required="true"/>
+                <ComboBox
+                    showSecondaryValues= "true"
+                    id="stateComboBox" 
+                    required="true"
+                    valueState="{/stateState}"
+                    items="{ path: '/StateCollection' }"
+                    placeholder="{i18n>statePlaceHolder}" 
+                    change="stepThreeValidation">
+                    <core:ListItem id="_IDGenListItem2" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabelMuni" text="{i18n>townLabel}" required="true"/>
+                <ComboBox
+                    showSecondaryValues= "true" 
+                    id="townComboBox" 
+                    required="true"
+                    valueState="{/townState}"
+                    items="{ path: '/TownCollection' }"
+                    placeholder="{i18n>townPlaceHolder}" 
+                    change="stepThreeValidation">
+                   <core:ListItem id="_IDGenListItem3" key="{ID}" text="{Town}"  additionalText = "{StateCode}" />
+                </ComboBox>
+                <Label id="_IDGenLabelPostal" text="{i18n>postalCodeLabel}" required="true"/>
+                <ComboBox 
+                    id="postalCodeComboBox"
+                    required="true"
+                    valueState="{/postalCodeState}"
+                    items="{ path: '/PostalCodeCollection' }"
+                    placeholder="{i18n>postalCodePlaceHolder}"
+                    change="stepThreeValidation">
+                    <core:ListItem id="_IDGenListItem4" key="{ID}" text="{Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabel3" text="{i18n>neighborhoodLabel}"/>
+                <ComboBox 
+                    id="neighborhoodComboBox"
+                    required="true"
+                    valueState="{/neighborhoodState}"
+                    items="{ path: '/NeighborhoodCollection' }"
+                    placeholder="{i18n>neighborhooddPlaceHolder}"
+                    change="stepThreeValidation">
+                    <core:ListItem id="_IDGenListItem5" key="{ID}" text="{Neighborhood}" />
+                </ComboBox>
+                <Label id="_IDGenLabel4" text="{i18n>streetLabel}"/>
+                <Input 
+                    id="streetInput"
+                    required="true"
+                    valueState="{/streetState}"
+                    valueStateText="{i18n>streetStateText}"
+                    placeholder="{i18n>streetPlaceHolder}"
+                    liveChange="stepThreeValidation"/>
+                <Label id="_IDGenLabel5" text="{i18n>numberLabel}"/>
+                <Input 
+                    id="numberInput"
+                    required="true"
+                    valueState="{/extNumberState}"
+                    valueStateText="{i18n>extNumberStateText}"
+                    placeholder="{i18n>numberPlaceHolder}"
+                    liveChange="stepThreeValidation"/>
+                <Label id="_IDGenLabel6" text="{i18n>intNumberLabel}"/>
+                <Input id="intNumberInput" placeholder="{i18n>intNumberPlaceHolder}"/>
+                <Label id="_IDGenLabel7" text="{i18n>latitudeLabel}"/>
+                <Input id="latitudeInput" type="Number" placeholder="{i18n>latitudePlaceHolder}"/>
+                <Label id="_IDGenLabel8" text="{i18n>longitudeLabel}"/>
+                <Input id="longitudeInput" type="Number" placeholder="{i18n>longitudePlaceHolder}"/>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="SuppliersStep"
+                title="{i18n>suppliersStep}"
+                validated="false"
+                activate="stepFourValidation">
+                <MessageStrip id="_IDGenMessageStrip4" class="sapUiSmallMarginBottom" text="{i18n>suppliersMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm3" editable="true">
+                <Label id="_IDGenLabel10" text="{i18n>electricSupplierLabel}" required="true"/>
+                <MultiComboBox
+                    id="electricSupplierComboBox"
+                    required="true"
+                    valueState="{/electricSupplierState}"
+                    valueStateText="{i18n>electricSupplierStateText}"
+                    placeholder="{i18n>electricSupplierPlaceHolder}"
+                    selectionChange="stepFourValidation"
+                    selectionFinish="stepFourValidation"
+                    items="{
+                        path: '/SiteElectricSuppliersCollection',
+                        sorter: { path: 'Name' }
+                    }">
+                    <core:Item key="{ID}" text="{Name}"/>
+                </MultiComboBox>
+                <Label id="_IDGenLabel11" text="{i18n>gasSupplierLabel}" required="true"/>
+                <MultiComboBox
+                    id="gasSupplierComboBox"
+                    required="true"
+                    valueState="{/gasSupplierState}"
+                    valueStateText="{i18n>gasSupplierStateText}"
+                    placeholder="{i18n>gasSupplierPlaceHolder}"
+                    selectionChange="stepFourValidation"
+                    selectionFinish="stepFourValidation"
+                    items="{
+                        path: '/SiteGasSuppliersCollection',
+                        sorter: { path: 'Name' }
+                    }">
+                    <core:Item key="{ID}" text="{Name}"/>
+                </MultiComboBox>
+                <Label id="_IDGenLabel12" text="{i18n>waterSupplierLabel}"/>
+                <MultiComboBox
+                    id="waterSupplierComboBox"
+                    required="true"
+                    valueState="{/waterSupplierState}"
+                    valueStateText="{i18n>waterSupplierStateText}"
+                    placeholder="{i18n>waterSupplierPlaceHolder}"
+                    selectionChange="stepFourValidation"
+                    selectionFinish="stepFourValidation"
+                    items="{
+                        path: '/SiteWaterSuppliersCollection',
+                        sorter: { path: 'Name' }
+                    }">
+                    <core:Item key="{ID}" text="{Name}"/>
+                </MultiComboBox>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="gatewatSIMStep" 
+                title="{i18n>gatewaySIMStep}"
+                validated="false"
+                activate="stepFiveValidation">
+                <MessageStrip id="_IDGenMessageStrip5" class="sapUiSmallMarginBottom" text="{i18n>gatewaySIMMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm5_5" editable="true">
+                <Label id="gatewayNameLabel" text="{i18n>gatewayName}"/>
+                <Input
+                    id="gatewayNameInput"
+                    required="true"
+                    valueState="{/gatewayNameState}"
+                    valueStateText="{i18n>gatewayNameStateText}"
+                    placeholder="{i18n>gatewayNamePlaceHolder}"
+                    liveChange="stepFiveValidation">
+		        </Input>
+                <Label id="gatewaySNLabel" text="{i18n>gatewaySN}"/>
+                <Input
+                    id="gatewaySNInput"
+                    required="true"
+                    valueState="{/gatewaySNState}"
+                    valueStateText="{i18n>gatewaySNStateText}"
+                    placeholder="{i18n>gatewaySNPlaceHolder}"
+                    liveChange="stepFiveValidation">
+		        </Input>
+                <Label id="gatewayPINLabel" text="{i18n>gatewayPIN}"/>
+                <Input
+                    id="gatewayPINInput"
+                    required="true"
+                    valueState="{/gatewayPINState}"
+                    valueStateText="{i18n>gatewayPINStateText}"
+                    placeholder="{i18n>gatewayPINPlaceHolder}"
+                    liveChange="stepFiveValidation">
+		        </Input>
+                <Label id="simIMSILabel" text="{i18n>simIMSI}"/>
+                <Input
+                    id="simIMSIInput"
+                    required="true"
+                    valueState="{/simIMSIState}"
+                    valueStateText="{i18n>simIMSIStateText}"
+                    placeholder="{i18n>simIMSIPlaceHolder}"
+                    liveChange="stepFiveValidation">
+		        </Input>
+                <Label id="simMSASDNLabel" text="{i18n>simMSASDN}"/>
+                <Input
+                    id="simMSASDNInput"
+                    required="true"
+                    valueState="{/simMSASDNState}"
+                    valueStateText="{i18n>simMSASDNStateText}"
+                    placeholder="{i18n>simMSASDNPlaceHolder}"
+                    liveChange="stepFiveValidation">
+		        </Input>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="contactStep" 
+                title="{i18n>contactStep}"
+                validated="false"
+                activate="stepSixValidation">
+                <MessageStrip id="_IDGenMessageStrip6" class="sapUiSmallMarginBottom" text="{i18n>contactMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm6_6" editable="true">
+                <Label id="contactNameLabel" text="{i18n>contactName}"/>
+                <Input
+                    id="contactNameInput"
+                    required="true"
+                    type="Text"
+                    valueState="{/contactNameState}"
+                    valueStateText="{i18n>contactNameStateText}"
+                    placeholder="{i18n>contactNamePlaceHolder}"
+                    liveChange="stepSixValidation">
+		        </Input>
+                <Label id="contactPhoneLabel" text="{i18n>contactPhone}"/>
+                <Input
+                    id="contactPhoneInput"
+                    required="false"
+                    type="Number"
+                    valueState="{/contactPhoneState}"
+                    valueStateText="{i18n>contactPhoneStateText}"
+                    placeholder="{i18n>contactPhonePlaceHolder}"
+                    liveChange="stepSixValidation">
+		        </Input>
+                <Label id="contactEmailLabel" text="{i18n>contactEmail}"/>
+                <Input
+                    id="contactEmailInput"
+                    required="false"
+                    type="Email"
+                    valueState="{/contactEmailState}"
+                    valueStateText="{i18n>contactEmailStateText}"
+                    placeholder="{i18n>contactEmailPlaceHolder}"
+                    liveChange="stepSixValidation">
+		        </Input>
+                </form:SimpleForm>
+            </WizardStep>
+        </Wizard>
+    </content>
+    <footer>
+        <OverflowToolbar id="_IDGenOverflowToolbar1">
+        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+        <Button id="_IDGenButton1" text="{i18n>buttonCancel}" press="handleCancel"/>
+        </OverflowToolbar>
+    </footer>
+    </Page>
+    <Page id="wizardReviewPage" showHeader="false">
+    <content>
+        <form:SimpleForm id="_IDGenSimpleForm4" title="1. {i18n>companyStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+            <form:content>
+                <Label id="_IDGenLabel17" text="{i18n>companyName}"/>
+                <Text id="companyNameChoosen" text=""/>
+                <Link id="_IDGenLink1" press="editStepOne" text="Editar" />
+            </form:content>
+        </form:SimpleForm>
+        <form:SimpleForm id="_IDGenSimpleFormSI6" title="2. {i18n>siteInfoStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabelSI17" text="{i18n>siteName}"/>
+            <Text id="siteNameChosen" text=" "/>
+            <Label id="_IDGenLabelSI18" text="{i18n>siteType}"/>
+            <Text id="siteTypeChosen" text=""/>
+            <Label id="_IDGenLabelSI19" text="{i18n>siteBusinessUnit}"/>
+            <Text id="siteBusinessUnitChosen" text=""/>
+            <Label id="_IDGenLabelSI20" text="{i18n>siteFormat}"/>
+            <Text id="siteFormatChosen" text=""/>
+            <Label id="_IDGenLabelSI21" text="{i18n>siteRPU}"/>
+            <Text id="siteRPUChosen" text=""/>
+            <Label id="_IDGenLabelSDivision" text="{i18n>division}"/>
+            <Text id="siteDivisionChosen" text=""/>
+            <Label id="_IDGenLabelFare" text="{i18n>fare}"/>
+            <Text id="siteFareChosen" text=""/>
+            <Label id="_IDGenLabelRegion" text="{i18n>region}"/>
+            <Text id="siteRegionChosen" text=""/>
+            <Label id="_IDGenLabelSI22" text="{i18n>siteCostCenter}"/>
+            <Text id="siteCostCenterChosen" text=" "/>
+            <Label id="_IDGenLabelSI23" text="{i18n>siteCostCenterEg}"/>
+            <Text id="siteCostCenterEgChosen" text=" "/>
+            <Label id="_IDGenLabelSI24" text="{i18n>timeZone}"/>
+            <Text id="timeZoneChosen" text=""/>
+            <Label id="_IDGenLabelSI25" text="{i18n>openHour}"/>
+            <Text id="openHourChosen" text=""/>
+            <Label id="_IDGenLabelSI26" text="{i18n>closeHour}"/>
+            <Text id="closeHourChosen" text=""/>
+            <Label id="_IDGenLabelStatus" text="{i18n>status}"/>
+            <Text id="siteStatusChosen" text=""/>
+            <Label id="_IDGenLabelContractedDemand" text="{i18n>contractedDemand}"/>
+            <Text id="siteContractedDemandChosen" text=""/>
+            <Label id="_IDGenLabelCutoffDate" text="{i18n>cutoffDate}"/>
+            <Text id="siteCutoffDateChosen" text=""/>
+            <Label id="_IDGenLabelMultiplier" text="{i18n>multiplier}"/>
+            <Text id="siteMultiplierChosen" text=""/>
+            <Label id="_IDGenLabelManager" text="{i18n>manager}"/>
+            <Text id="siteManagerChosen" text=""/>
+            <Label id="_IDGenLabelconstructedAreaChosen" text="{i18n>constructedAreaLabel}"/>
+            <Text id="constructedAreaChosen" text=""/>
+            <Link id="_IDGenLinkSI2" press="editStepTwo" text="Editar" />
+        </form:content>
+        </form:SimpleForm>
+        <form:SimpleForm id="_IDGenSimpleForm6" title="3. {i18n>AddressStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabel20" text="{i18n>countryLabel}"/>
+            <Text id="countryChosen" text=" "/>
+            <Label id="_IDGenLabel21" text="{i18n>stateLabel}"/>
+            <Text id="stateChosen" text=""/>
+            <Label id="_IDGenLabel22" text="{i18n>townLabel}"/>
+            <Text id="townChosen" text=""/>
+            <Label id="_IDGenLabel23" text="{i18n>postalCodeLabel}"/>
+            <Text id="postalCodeChosen" text=" "/>
+            <Label id="_IDGenLabel24" text="{i18n>neighborhoodLabel}"/>
+            <Text id="neighborhoodChosen" text=""/>
+            <Label id="_IDGenLabel25" text="{i18n>streetLabel}"/>
+            <Text id="streetChosen" text=""/>
+            <Label id="_IDGenLabel26" text="{i18n>numberLabel}"/>
+            <Text id="numberChosen" text=""/>
+            <Label id="_IDGenLabel27" text="{i18n>intNumberLabel}"/>
+            <Text id="intNumberChosen" text=""/>
+            <Label id="_IDGenLabel28" text="{i18n>latitudeLabel}"/>
+            <Text id="latitudeChosen" text=""/>
+            <Label id="_IDGenLabel29" text="{i18n>longitudeLabel}"/>
+            <Text id="longitudeChosen" text=""/>
+            <Link id="_IDGenLink2" press="editStepThree" text="Editar" />
+        </form:content>
+        </form:SimpleForm>
+      <form:SimpleForm id="_IDGenSimpleFormSP6" title="4. {i18n>suppliersStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabelSP20" text="{i18n>electricSupplierLabel}"/>
+            <Text id="electricSupplierChosen" text=""/>
+            <Label id="_IDGenLabelSP21" text="{i18n>gasSupplierLabel}"/>
+            <Text id="gasSupplierChosen" text=""/>
+            <Label id="_IDGenLabelSP22" text="{i18n>waterSupplierLabel}"/>
+            <Text id="waterSupplierChosen" text=""/>
+            <Link id="_IDGenLinkSP2" press="editStepFour" text="Editar" />
+        </form:content>
+     </form:SimpleForm>
+     <form:SimpleForm id="_IDGenSimpleFormGW6" title="5. {i18n>gatewaySIMStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabelGW20" text="{i18n>gatewayName}"/>
+            <Text id="gatewayNameChosen" text=""/>
+            <Label id="_IDGenLabelGW21" text="{i18n>gatewaySN}"/>
+            <Text id="gatewaySNChosen" text=""/>
+            <Label id="_IDGenLabelGW22" text="{i18n>gatewayPIN}"/>
+            <Text id="gatewayPINChosen" text=""/>
+            <Label id="_IDGenLabelGW23" text="{i18n>simIMSI}"/>
+            <Text id="simIMSIChosen" text=""/>
+            <Label id="_IDGenLabelGW24" text="{i18n>simMSASDN}"/>
+            <Text id="simMSASDNChosen" text=""/>
+            <Link id="_IDGenLinkGW2" press="editStepFive" text="Editar" />
+        </form:content>
+     </form:SimpleForm>
+     <form:SimpleForm id="_IDGenSimpleFormC6" title="6. {i18n>contactStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabelC20" text="{i18n>contactName}"/>
+            <Text id="contactNameChosen" text=""/>
+            <Label id="_IDGenLabelC21" text="{i18n>contactPhone}"/>
+            <Text id="contactPhoneChosen" text=""/>
+            <Label id="_IDGenLabelC22" text="{i18n>contactEmail}"/>
+            <Text id="contactEmailChosen" text=""/>
+            <Link id="_IDGenLinkC2" press="editStepSix" text="Editar" />
+        </form:content>
+     </form:SimpleForm>
+    </content>
+    <footer>
+        <Bar id="_IDGenBar1">
+        <contentRight>
+            <Button id="_IDGenButton2" text="{i18n>buttonSave}" press="handleWizardSubmit" icon="sap-icon://save" type="Accept"/>
+            <Button id="_IDGenButton3" text="{i18n>buttonCancel}" press="handleWizardCancel" icon="sap-icon://clear-all" type="Reject"/>
+        </contentRight>
+        </Bar>
+    </footer>
+    </Page>
+</pages>
+</NavContainer>
+</mvc:View>

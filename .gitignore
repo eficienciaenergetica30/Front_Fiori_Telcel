@@ -1,0 +1,10 @@
+.vscode/launch.json
+site/mta_archives/
+sensor/mta_archives/
+zone/mta_archives/
+company/mta_archives/
+
+site/node_modules/
+sensor/node_modules/
+zone/node_modules/
+company/node_modules/

@@ -1,0 +1,130 @@
+<mvc:View
+    controllerName="globalhitss.ee.zone.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+   <App id="App">
+        <Page id="Page" title="{i18n>worklistTitle}">
+            <FlexBox id="FlexBox" 
+                direction="Row"
+                justifyContent="SpaceAround"
+                alignItems="Center"
+                wrap="Wrap">
+                <Title
+                    id="tableHeader"
+                    text="{worklistView>/worklistTableTitle}"
+                    level="H3"/>
+                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                <Button id="_IDGenButton1" icon="sap-icon://write-new" text="Crear Nueva Zona" type="Transparent" press=".handlePopoverPress"/>
+                <SearchField
+                    id="searchField"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    placeholder="{i18n>searchPlaceHolder}"
+                    search=".onSearchName">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchFieldBusinessUnit"
+                    placeholder ="{i18n>searchCompanyPlaceHolder}"
+                    tooltip="{i18n>worklistSearchCompanyTooltip}"
+                    search=".onSearchBusinessUnit">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData4"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <ComboBox
+                    showSecondaryValues= "true"
+                    id="searchSiteComboBox"
+                    width="240px"
+                    items="{ path: '/SiteCollection' }"
+                    tooltip="{i18n>worklistSearchSiteTooltip}"
+                    placeholder="{i18n>searchSitePlaceHolder}"
+                    change=".onSearchSiteCombo"
+                    selectionChange=".onSelectionChange">
+                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{name}" additionalText="{costCenter}"/>
+                </ComboBox>
+                <SearchField
+                    id="searchCostCenter"
+                    placeholder="{i18n>worklistSearchCostCenter}"
+                    tooltip="{i18n>worklistSearchCostCenterTooltip}"
+                    search=".onSearchCostCenter">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <Switch 
+                    id="deleteRecords" 
+                    tooltip="{i18n>deleteRecords}" 
+                    change="handleChangeSwitch">
+                </Switch>
+            </FlexBox>
+
+            <Table
+                id="table"
+                width="auto"
+                items="{
+                    path: 'Zones>/',
+                    sorter: {
+                        path: 'site/name,name',
+                        descending: false
+                    }
+                }"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                growingThreshold="20"
+                updateFinished=".onUpdateFinished">
+
+                <columns>
+                    <Column id="friendlyNameCol">
+                        <Text text="{i18n>nameLabel}" id="friendlyNameText"/>
+                    </Column>
+                    <Column id="siteNameCol">
+                        <Text text="{i18n>siteNameLabel}" id="siteNameText"/> 
+                    </Column>
+                    <Column id="costCenterCol">
+                        <Text text="{i18n>costCenterLabel}" id="costCenterText"/>
+                    </Column>
+                    <Column id="businessUnitCol">
+                        <Text text="{i18n>businessUnitLabel}" id="businessUnitText"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1"
+                        type="Navigation"
+                        press=".onPress">
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier1"
+                                title="{Zones>name}"/>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier2"
+                                title="{Zones>site/name}"/>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier3"
+                                title="{Zones>site/costCenter}"/>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier4"
+                                title="{Zones>site/businessUnit}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Page>
+    </App>
+
+</mvc:View>

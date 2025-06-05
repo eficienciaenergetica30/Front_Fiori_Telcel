@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: telcl-ee-company
+description: Aplicación para gestionar y las compañías
+version: 0.0.1
+modules:
+- name: telcl-ee-company-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: telcl-ee-company-dest-srv
+    parameters:
+      content-target: true
+  - name: telcl-ee-company-repo-host
+    parameters:
+      service-key:
+        name: telcl-ee-company-repo-host-key
+  - name: telcl-ee-company-uaa
+    parameters:
+      service-key:
+        name: telcl-ee-company-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: telcl-ee-company_repo_host
+          ServiceInstanceName: telcl-ee-company-html5-srv
+          ServiceKeyName: telcl-ee-company-repo-host-key
+          sap.cloud.service: telcl-ee-company
+        - Authentication: OAuth2UserTokenExchange
+          Name: telcl-ee-company_uaa
+          ServiceInstanceName: telcl-ee-company-xsuaa-srv
+          ServiceKeyName: telcl-ee-company-uaa-key
+          sap.cloud.service: telcl-ee-company
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: telcl-ee-company-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: telcl-ee-company-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - globalhitsseecompany.zip
+      name: globalhitsseecompany
+      target-path: resources/
+- name: globalhitsseecompany
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: telcl-ee-company-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: telcl-ee-company-dest-srv
+    service-plan: lite
+- name: telcl-ee-company-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: telcl-ee-company-xsuaa-srv
+    service-plan: application
+- name: telcl-ee-company-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: telcl-ee-company-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

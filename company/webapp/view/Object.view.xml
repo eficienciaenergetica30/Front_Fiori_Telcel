@@ -1,0 +1,162 @@
+<mvc:View
+    controllerName="globalhitss.ee.company.controller.Object"
+    xmlns:m="sap.m"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:semantic="sap.f.semantic">
+
+    <ObjectPageLayout
+        id="pageObjectCompany"
+        toggleHeaderOnTitleClick="false"
+        busy="{objectView>/busy}"
+        busyIndicatorDelay="{objectView>/delay}">
+
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+                <expandedHeading>
+                    <m:HBox id="_IDGenHBox1">
+                        <m:Title id="_IDGenTitleCompany"
+                            text="{CompanyInfo>/businessName}"
+                            level="H1"/>
+                    </m:HBox>
+                </expandedHeading>
+                <actions>
+					<m:Button id="editButton" icon="sap-icon://edit" text="{i18n>editButton}" type="Emphasized" press="editObject"/>
+					<m:Button id="saveButton" icon="sap-icon://save" text="{i18n>saveButton}" type="Accept" press="saveEditedObject"/>
+                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${CompanyInfo>/deletionRequest} === 0 ? true : false}"/>
+                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${CompanyInfo>/deletionRequest} === 1 ? true : false}"/>
+				</actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        
+        <headerContent>
+            <m:FlexBox id="_IDGenFlexBox1"
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+                <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd">
+					<m:Text id="companyID" text="{CompanyInfo>/ID}"/>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" id="nameStepDetail" title="{i18n>nameStepDetail}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection1">
+                        <blocks>
+                            <m:VBox id="_IDGenVBox">
+                                <m:Title id="_IDGenTitle" 
+                                    text="{i18n>nameStepDetail}" 
+                                    level="H3"
+                                    class="sapUxAPObjectPageSectionTitle"/>
+                                <form:SimpleForm id="_IDGenSimpleForm01"
+                                    minWidth="1024"
+                                    maxContainerCols="2"
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    columnsL="1"
+                                    columnsM="1">
+                                    <form:content>
+                                        <m:Label id="_IDGenLabel1" text="{i18n>businessNameLabel}"/>
+                                        <m:Input id="businessName" required="true" value="{CompanyInfo>/businessName}" editable="false" placeholder="{i18n>businessNamePlaceHolder}"/>
+                                        <m:Label id="_IDGenLabel2" text="{i18n>friendlyNameLabel}"/>
+                                        <m:Input id="friendlyName" required="true" value="{CompanyInfo>/friendlyName}" editable="false" placeholder="{i18n>friendlyNamePlaceHolder}"/>
+                                        <m:Label id="_IDGenLabel3" text="{CompanyInfo>/deletionRequest}" visible="false"/>
+                                        <core:InvisibleText id="companyDeletionRequestInvisible" text="{CompanyInfo>/deletionRequest}"/>
+                                        <m:Label id="_IDGenLabel4" text="{CompanyInfo>/addressID}" visible="false"/>
+                                        <core:InvisibleText id="addressIDInvisible" text="{CompanyInfo>/addressID}"/>
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" id="addressStep" title="{i18n>AddressStep}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection2">
+                        <form:SimpleForm id="_IDGenSimpleForm02"
+                            minWidth="1024"
+                            maxContainerCols="2"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            columnsL="1"
+                            columnsM="1">
+                            <form:content>
+                                <m:Label id="_IDGenLabel5" text="{i18n>countryLabel}"/>
+                                <m:Input id="country" required="true" value="{CompanyInfo>/address/country}" editable="false" placeholder="{i18n>countryPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel6" text="{i18n>stateLabel}"/>
+					            <m:Input id="state" required="true" value="{CompanyInfo>/address/state}" editable="false" placeholder="{i18n>statePlaceHolder}"/>
+                                <m:Label id="_IDGenLabel7" text="{i18n>townLabel}"/>
+					            <m:Input id="town" required="true" value="{CompanyInfo>/address/town}" editable="false" placeholder="{i18n>townPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel8" text="{i18n>postalCodeLabel}"/>
+					            <m:Input id="postalCode" required="true" value="{CompanyInfo>/address/postalCode}" editable="false" placeholder="{i18n>postalCodePlaceHolder}"/>
+                                <m:Label id="_IDGenLabel9" text="{i18n>neighborhoodLabel}"/>
+					            <m:Input id="neighborhood" required="true" value="{CompanyInfo>/address/neighborhood}" editable="false" placeholder="{i18n>neighborhooddPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel10" text="{i18n>streetLabel}"/>
+					            <m:Input id="street" required="true" value="{CompanyInfo>/address/street}" editable="false" placeholder="{i18n>streetPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel11" text="{i18n>numberLabel}"/>
+					            <m:Input id="number" required="true" value="{CompanyInfo>/address/extNumber}" editable="false" placeholder="{i18n>numberPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel12" text="{i18n>intNumberLabel}"/>
+					            <m:Input id="intNumber" value="{CompanyInfo>/address/intNumber}" editable="false" placeholder="{i18n>intNumberPlaceHolder}"/>
+                                <m:Label id="_IDGenLabel13" text="{i18n>latitudeLabel}"/>
+					            <m:Input id="latitude" value="{CompanyInfo>/address/latitude}" editable="false" placeholder="{i18n>latitudePlaceHolder}"/>
+                                <m:Label id="_IDGenLabel14" text="{i18n>longitudeLabel}"/>
+					            <m:Input id="longitude" value="{CompanyInfo>/address/longitude}" editable="false" placeholder="{i18n>longitudePlaceHolder}"/>
+                                <m:Label id="_IDGenLabel15" text="{i18n>builtAreaLabel}"/>
+					            <m:Input id="builtArea" value="{CompanyInfo>/address/builtArea}" editable="false" placeholder="{i18n>builtAreaPlaceHolder}"/>
+                            </form:content>						
+                        </form:SimpleForm>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" id="detailsSiteStep" title="{i18n>detailsSiteStep}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection3">
+                        <form:SimpleForm id="_IDGenSimpleForm03"
+                            minWidth="1024"
+                            maxContainerCols="2"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            columnsL="1"
+                            columnsM="1">
+                            <form:content>
+                                <m:Label id="_IDGenLabel16" text="{i18n>businessActivityLabel}"/>
+                                <m:ComboBox id="businessActivityComboBox" required="true" placeholder="{i18n>businessActivityPlaceHolder}" editable="false">
+                                    <core:Item id="_IDGenItemBA1" key="1" text="Retail"/>
+                                    <core:Item id="_IDGenItemBA2" key="2" text="Telecomunicaciones"/>
+                                    <core:Item id="_IDGenItemBA3" key="3" text="Servicios"/>
+                                </m:ComboBox>
+                                <m:Label id="_IDGenLabel17" text="{i18n>currencyLabel}"/>
+                                <m:ComboBox id="currencyComboBox" required="true" placeholder="{i18n>currencyPlaceHolder}" editable="false">
+                                    <core:Item id="_IDGenItemCostCenter1" key="1" text="MXN"/>
+                                    <core:Item id="_IDGenItemCostCenter2" key="2" text="USD"/>
+                                    <core:Item id="_IDGenItemCostCenter3" key="3" text="EUR"/>
+                                    <core:Item id="_IDGenItemCostCenter4" key="4" text="BTC"/>
+                                </m:ComboBox>
+                            </form:content>						
+                        </form:SimpleForm>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+        </sections>       
+        
+    </ObjectPageLayout>
+</mvc:View>

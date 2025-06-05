@@ -1,0 +1,222 @@
+<mvc:View height="100%" controllerName="globalhitss.ee.company.controller.Wizard"
+xmlns:form="sap.ui.layout.form"
+xmlns:core="sap.ui.core"
+xmlns:u="sap.ui.unified"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m">
+<NavContainer id="wizardNavContainer">
+<pages>
+    <Page id="wizardContentPage" showHeader="true">
+    <content>
+        <Wizard 
+            id="CreateCompanyWizard"   
+            class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+            complete="wizardCompletedHandler">
+            <WizardStep 
+                id="NameStep" 
+                title="{i18n>nameStep}"
+                validated="false"
+                activate="stepOneValidation">
+                <MessageStrip id="_IDGenMessageStrip1" class="sapUiSmallMarginBottom" text="{i18n>companyMessage}" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm1_1" editable="true">
+                <Label id="businessNameLabel" text="{i18n>businessName}"/>
+                <Input
+                    id="businessNameInput"
+                    required="true"
+                    valueState="{/businessNameState}"
+                    valueStateText="{i18n>businessNameStateText}"
+                    placeholder="{i18n>businessNamePlaceHolder}"
+                    liveChange="stepOneValidation">
+		        </Input>
+                <Label id="friendlyNameLabel" text="{i18n>friendlyName}"/>
+                <Input
+                    id="friendlyNameInput"
+                    required="true"
+                    valueState="{/friendlyNameState}"
+                    valueStateText="{i18n>friendlyNameStateText}"
+                    placeholder="{i18n>friendlyNamePlaceHolder}"
+                    liveChange="stepOneValidation">
+                </Input>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep 
+                id="AddressStep" 
+                title="{i18n>AddressStep}"
+                validated="false"
+                activate="stepTwoValidation">
+                <MessageStrip 
+                    id="_IDGenMessageStrip3"
+                    class="sapUiSmallMarginBottom" 
+                    text="{i18n>addressCompanyMessage}" 
+                    showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm1" editable="true">
+                <Label id="_IDGenLabel2" text="{i18n>countryLabel}" required="true"/>
+                <ComboBox
+                	showSecondaryValues= "true"
+                    id="countryComboBox"
+                    required="true"
+                    valueState="{/countryState}"
+                    items="{ path: '/CountryCollection' }"
+                    placeholder="{i18n>countryPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItem1" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabelState" text="{i18n>stateLabel}" required="true"/>
+                <ComboBox
+                    showSecondaryValues= "true"
+                    id="stateComboBox" 
+                    required="true"
+                    valueState="{/stateState}"
+                    items="{ path: '/StateCollection' }"
+                    placeholder="{i18n>statePlaceHolder}" 
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItem2" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabelMuni" text="{i18n>townLabel}" required="true"/>
+                <ComboBox
+                    showSecondaryValues= "true" 
+                    id="townComboBox" 
+                    required="true"
+                    valueState="{/townState}"
+                    items="{ path: '/TownCollection' }"
+                    placeholder="{i18n>townPlaceHolder}" 
+                    change="stepTwoValidation">
+                   <core:ListItem id="_IDGenListItem3" key="{ID}" text="{Town}"  additionalText = "{StateCode}" />
+                </ComboBox>
+                <Label id="_IDGenLabelPostal" text="{i18n>postalCodeLabel}" required="true"/>
+                <ComboBox 
+                    id="postalCodeComboBox"
+                    required="true"
+                    valueState="{/postalCodeState}"
+                    items="{ path: '/PostalCodeCollection' }"
+                    placeholder="{i18n>postalCodePlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItem4" key="{ID}" text="{Code}" />
+                </ComboBox>
+                <Label id="_IDGenLabel3" text="{i18n>neighborhoodLabel}"/>
+                <ComboBox 
+                    id="neighborhoodComboBox"
+                    required="true"
+                    valueState="{/neighborhoodState}"
+                    items="{ path: '/NeighborhoodCollection' }"
+                    placeholder="{i18n>neighborhooddPlaceHolder}"
+                    change="stepTwoValidation">
+                    <core:ListItem id="_IDGenListItem5" key="{ID}" text="{Neighborhood}" />
+                </ComboBox>
+                <Label id="_IDGenLabel4" text="{i18n>streetLabel}"/>
+                <Input 
+                    id="streetInput"
+                    required="true"
+                    valueState="{/streetState}"
+                    valueStateText="{i18n>streetStateText}"
+                    placeholder="{i18n>streetPlaceHolder}"
+                    liveChange="stepTwoValidation"/>
+                <Label id="_IDGenLabel5" text="{i18n>numberLabel}"/>
+                <Input 
+                    id="numberInput"
+                    required="true"
+                    valueState="{/extNumberState}"
+                    valueStateText="{i18n>extNumberStateText}"
+                    placeholder="{i18n>numberPlaceHolder}"
+                    liveChange="stepTwoValidation"/>
+                <Label id="_IDGenLabel6" text="{i18n>intNumberLabel}"/>
+                <Input id="intNumberInput" placeholder="{i18n>intNumberPlaceHolder}"/>
+                <Label id="_IDGenLabel7" text="{i18n>latitudeLabel}"/>
+                <Input id="latitudeInput" type="Number" placeholder="{i18n>latitudePlaceHolder}"/>
+                <Label id="_IDGenLabel8" text="{i18n>longitudeLabel}"/>
+                <Input id="longitudeInput" type="Number" placeholder="{i18n>longitudePlaceHolder}"/>
+                <Label id="_IDGenLabel9" text="{i18n>builtAreaLabel}"/>
+                <Input id="builtAreaInput" type="Number" placeholder="{i18n>builtAreaPlaceHolder}"/>
+                </form:SimpleForm>
+            </WizardStep>
+            <WizardStep id="DetailsSiteStep" title="{i18n>detailsSiteStep}">
+                <MessageStrip id="_IDGenMessageStrip4" class="sapUiSmallMarginBottom" text="Agrega las particularidades del sitio" showIcon="true"/>
+                <form:SimpleForm id="_IDGenSimpleForm3" editable="true">
+                <Label id="_IDGenLabel10" text="{i18n>businessActivityLabel}" required="true"/>
+                <ComboBox id="businessActivityComboBox" required="true" change="detailsValidation">
+                    <core:Item id="_IDGenItemBA1" key="1" text="Retail"/>
+                    <core:Item id="_IDGenItemBA2" key="2" text="Telecomunicaciones"/>
+                    <core:Item id="_IDGenItemBA3" key="3" text="Servicios"/>
+                </ComboBox>
+                <Label id="_IDGenLabel11" text="{i18n>currencyLabel}" required="true"/>
+                <ComboBox id="currencyComboBox" required="true" change="detailsValidation">
+                    <core:Item id="_IDGenItemCostCenter1" key="1" text="MXN"/>
+                    <core:Item id="_IDGenItemCostCenter2" key="2" text="USD"/>
+                    <core:Item id="_IDGenItemCostCenter3" key="3" text="EUR"/>
+                    <core:Item id="_IDGenItemCostCenter4" key="4" text="BTC"/>
+                </ComboBox>
+                </form:SimpleForm>
+            </WizardStep>
+        </Wizard>
+    </content>
+    <footer>
+        <OverflowToolbar id="_IDGenOverflowToolbar1">
+        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+        <Button id="_IDGenButton1" text="{i18n>buttonCancel}" press="handleCancel"/>
+        </OverflowToolbar>
+    </footer>
+    </Page>
+    <Page id="wizardReviewPage" showHeader="false">
+    <content>
+        <form:SimpleForm id="_IDGenSimpleForm4" title="1. {i18n>nameStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+            <form:content>
+                <Label id="_IDGenLabel17" text="{i18n>businessNameLabel}"/>
+                <Text id="businessNameChoosen" text=""/>
+            </form:content>
+             <form:content>
+                <Label id="_IDGenLabel18" text="{i18n>friendlyName}"/>
+                <Text id="friendlyNameChoosen" text=""/>
+                <Link id="_IDGenLink1" press="editStepOne" text="Editar" />
+            </form:content>
+        </form:SimpleForm>
+
+        <form:SimpleForm id="_IDGenSimpleForm6" title="3. {i18n>AddressStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabel20" text="{i18n>countryLabel}"/>
+            <Text id="countryChosen" text=" "/>
+            <Label id="_IDGenLabel21" text="{i18n>stateLabel}"/>
+            <Text id="stateChosen" text=""/>
+            <Label id="_IDGenLabel22" text="{i18n>townLabel}"/>
+            <Text id="townChosen" text=""/>
+            <Label id="_IDGenLabel23" text="{i18n>postalCodeLabel}"/>
+            <Text id="postalCodeChosen" text=" "/>
+            <Label id="_IDGenLabel24" text="{i18n>neighborhoodLabel}"/>
+            <Text id="neighborhoodChosen" text=""/>
+            <Label id="_IDGenLabel25" text="{i18n>streetLabel}"/>
+            <Text id="streetChosen" text=""/>
+            <Label id="_IDGenLabel26" text="{i18n>numberLabel}"/>
+            <Text id="numberChosen" text=""/>
+            <Label id="_IDGenLabel27" text="{i18n>intNumberLabel}"/>
+            <Text id="intNumberChosen" text=""/>
+            <Label id="_IDGenLabel28" text="{i18n>latitudeLabel}"/>
+            <Text id="latitudeChosen" text=""/>
+            <Label id="_IDGenLabel29" text="{i18n>longitudeLabel}"/>
+            <Text id="longitudeChosen" text=""/>
+            <Label id="_IDGenLabel30" text="{i18n>builtAreaLabel}"/>
+            <Text id="builtAreaChosen" text=""/>
+            <Link id="_IDGenLink2" press="editStepTwo" text="Editar" />
+        </form:content>
+        </form:SimpleForm>
+
+        <form:SimpleForm id="_IDGenSimpleForm7" title="4. {i18n>detailsSiteStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+        <form:content>
+            <Label id="_IDGenLabel31" text="{i18n>businessActivityLabel}"/>
+            <Text id="businessActivityChoosen" text=""/>
+            <Label id="_IDGenLabel32" text="{i18n>currencyLabel}"/>
+            <Text id="currencyChoosen" text=""/>
+            <Link id="_IDGenLink3" press="editStepThree" text="Editar" />
+        </form:content>
+        </form:SimpleForm>
+    </content>
+    <footer>
+        <Bar id="_IDGenBar1">
+        <contentRight>
+            <Button id="_IDGenButton2" text="{i18n>buttonSave}" press="handleWizardSubmit" icon="sap-icon://save" type="Accept"/>
+            <Button id="_IDGenButton3" text="{i18n>buttonCancel}" press="handleWizardCancel" icon="sap-icon://clear-all" type="Reject"/>
+        </contentRight>
+        </Bar>
+    </footer>
+    </Page>
+</pages>
+</NavContainer>
+</mvc:View>

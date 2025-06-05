@@ -1,0 +1,176 @@
+<mvc:View
+    controllerName="globalhitss.ee.sensor.controller.Object"
+    xmlns:m="sap.m"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:semantic="sap.f.semantic">
+
+    <ObjectPageLayout
+        id="pageObject"
+        toggleHeaderOnTitleClick="false"
+        busy="{objectView>/busy}"
+        busyIndicatorDelay="{objectView>/delay}">
+
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+                <expandedHeading>
+                    <m:HBox id="_IDGenHBox1">
+                        <m:Title id="_IDGenTitle1"
+                            text="{SensorInfo>/name}"
+                            level="H1"/>
+                    </m:HBox>
+                </expandedHeading>
+                <actions>
+					<m:Button id="editButton" icon="sap-icon://edit" text="{i18n>editButton}" type="Emphasized" press="editObject"/>
+					<m:Button id="saveButton" icon="sap-icon://save" text="{i18n>saveButton}" type="Accept" press="saveEditedObject"/>
+                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${SensorInfo>/deletionRequest} === 0 ? true : false}"/>
+                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${SensorInfo>/deletionRequest} === 1 ? true : false}"/>
+				</actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        
+        <headerContent>
+            <m:FlexBox id="_IDGenFlexBox1"
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+                <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd">
+					<m:Text id="siteID" text="{SensorInfo>/ID}"/>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" id="sensorSection" title="{i18n>sensorStep}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection1">
+                        <blocks>
+                            <m:VBox id="_IDGenVBox">
+                                <m:Title id="_IDGenTitle" 
+                                    text="{i18n>sensorStep}" 
+                                    level="H3"
+                                    class="sapUxAPObjectPageSectionTitle"/>
+                                <form:SimpleForm id="_IDGenSimpleForm01"
+                                    minWidth="1024"
+                                    maxContainerCols="2"
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    columnsL="1"
+                                    columnsM="1">
+                                    <form:content>
+                                        <m:Label id="_IDGenLabel1" text="{i18n>sensorName}"/>
+                                        <m:Input id="sensorName" required="true" value="{SensorInfo>/name}" editable="false" placeholder="{i18n>namePlaceholder}"/>
+                                        <m:Label id="_IDGenLabel3" text="{i18n>sensorService}"/>
+                                        <m:ComboBox
+                                            id="sensorTypeComboBox"
+                                            required="true"
+                                            selectedKey="{/SensorTypeID}"
+                                            items="{ path: '/SensorTypeCollection' }"
+                                            change="typeChange"
+                                            placeholder="{i18n>sensorServicePlaceholder}">
+                                            <core:ListItem id="_IDGenListItem2" key="{ID}" text="{name}" />
+                                        </m:ComboBox>
+                                        <m:Label id="_IDGenLabel4" text="{i18n>modbusAddress}"/>
+                                        <m:Input id="modbusAddress" required="true" value="{SensorInfo>/modbusAddress}" editable="false" placeholder="{i18n>modbusAddressPlaceholder}"/>
+                                        <m:Label id="_IDGenLabel5" text="{i18n>baudRate}"/>
+                                        <m:Input id="baudRate" required="true" value="{SensorInfo>/baudRate}" editable="false" placeholder="{i18n>baudratePlaceholder}"/>
+                                        <m:Label id="_IDGenLabel6" text="{i18n>serialNumber}"/>
+                                        <m:Input id="serialNumber" required="true" value="{SensorInfo>/serialNumber}" editable="false" placeholder="{i18n>serialnumberPlaceholder}"/>
+                                        <m:Label id="_IDGenLabel7" text="{i18n>sensorType}"/>
+                                        <m:Input id="type" required="true" value="{SensorInfo>/type}" editable="false" placeholder="{i18n>sensorTypePlaceholder}"/>
+                                        <m:Label id="sensorBlockLabel" visible="false" text="{i18n>sensorBlock}"/>
+                                        <m:Input id="block" required="true" value="{SensorInfo>/block}" editable="false" visible="false" placeholder="{i18n>sensorBlockPlaceholder}"/>
+                                        <m:Label id="sensorLocationLabel" text="{i18n>sensorLocation}" visible="{/isSensorVisible}"/>
+                                        <m:ComboBox
+                                            id="sensorLocationComboBox"
+                                            required="true"
+                                            visible="{/isSensorVisible}"
+                                            selectedKey="{/SensorLocationID}"
+                                            items="{ path: '/SensorLocationCollection' }"
+                                            placeholder="{i18n>sensorLocationPlaceholder}">
+                                            <core:ListItem id="_IDGenListItem3" key="{ID}" text="{name}" />
+                                        </m:ComboBox>
+                                        <m:Label id="sensorParentLabel" text="{i18n>sensorParent1}" visible="{/isSensorVisible}"/>
+                                        <m:ComboBox
+                                            id="sensorParentComboBox"
+                                            required="true"
+                                            visible="{/isSensorVisible}"
+                                            selectedKey="{/SensorParentID}"
+                                            showSecondaryValues="true"
+                                            items="{
+                                                path: 'SensorParent>/SensorParents',
+                                                parameters: {
+                                                    expand: 'SensorParent'
+                                                }
+                                            }"
+                                            placeholder="{i18n>sensorParent1Placeholder}">
+                                            <core:ListItem
+                                                id="_IDGenListItem4"
+                                                key="{SensorParent>ID}"
+                                                text="{SensorParent>name}"
+                                                additionalText="{
+                                                    parts: [
+                                                        { path: 'SensorParent>zone/name' },
+                                                        { path: 'SensorParent>zone/site/name' }
+                                                    ],
+                                                    formatter: '.formatter.formatZoneSite'
+                                                }"
+                                            />
+                                        </m:ComboBox>
+                                        <m:Label id="_IDGenLabel8" text="{SensorInfo>/siteID}" visible="false"/>
+                                        <core:InvisibleText id="sensorSiteIDInvisible" text="{SensorInfo>/siteID}"/>
+                                        <m:Label id="zoneLabelInvisible" text="{SensorInfo>/zoneID}" visible="false"/>
+                                        <core:InvisibleText id="zoneIDInvisible" text="{SensorInfo>/zoneID}"/>
+                                        <m:Label id="_IDGenLabel9" text="{SensorInfo>/parent}" visible="false"/>
+                                        <core:InvisibleText id="sensorParentInvisible" text="{SensorInfo>/parent}"/>
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>    
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" id="zoneInfoSection" title="{i18n>zoneInfoStep}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection2">
+                        <form:SimpleForm id="_IDGenSimpleForm02"
+                            minWidth="1024"
+                            maxContainerCols="2"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            columnsL="1"
+                            columnsM="1">
+                            <form:content>
+                                <m:Label id="zoneLabel" text="{i18n>zoneName}"/>
+                                <m:ComboBox
+                                    id="sensorZoneComboBox"
+                                    required="true"
+                                    editable="false"
+                                    showSecondaryValues="true"
+                                    selectedKey="{/SensorZoneID}"
+                                    items="{ path: '/ZoneCollection' }"
+                                    placeholder="{i18n>sensorServicePlaceholder}">
+                                    <core:ListItem id="_IDGenListItem" key="{ID}" text="{name}" />
+                                </m:ComboBox>
+                                <m:Label id="_IDGenLabelSiteName" text="{i18n>siteName}"/>
+					            <m:Input id="siteName" value="{SensorInfo>/site/name}" editable="false"/>
+                            </form:content>						
+                        </form:SimpleForm>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+        </sections>       
+        
+    </ObjectPageLayout>
+</mvc:View>

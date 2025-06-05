@@ -1,0 +1,108 @@
+<mvc:View
+    controllerName="globalhitss.ee.zone.controller.Object"
+    xmlns:m="sap.m"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:semantic="sap.f.semantic">
+
+    <ObjectPageLayout
+        id="pageZone"
+        toggleHeaderOnTitleClick="false"
+        busy="{objectView>/busy}"
+        busyIndicatorDelay="{objectView>/delay}">
+
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+                <expandedHeading>
+                    <m:HBox id="_IDGenHBox1">
+                        <m:Title id="_IDGenTitle1"
+                            text="{ZoneInfo>/name}"
+                            level="H1"/>
+                    </m:HBox>
+                </expandedHeading>
+                <actions>
+					<m:Button id="editButton" icon="sap-icon://edit" text="{i18n>editButton}" type="Emphasized" press="editObject"/>
+					<m:Button id="saveButton" icon="sap-icon://save" text="{i18n>saveButton}" type="Accept" press="saveEditedObject"/>
+                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${ZoneInfo>/deletionRequest} === 0 ? true : false}"/>
+                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${ZoneInfo>/deletionRequest} === 1 ? true : false}"/>
+				</actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        
+        <headerContent>
+            <m:FlexBox id="_IDGenFlexBox1"
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+                <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd">
+					<m:Text id="zoneID" text="{ZoneInfo>/ID}"/>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" id="zoneSection" title="{i18n>zoneStep}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection1">
+                        <blocks>
+                            <m:VBox id="_IDGenVBox">
+                                <m:Title id="_IDGenTitle" 
+                                    text="{i18n>zoneStep}" 
+                                    level="H3"
+                                    class="sapUxAPObjectPageSectionTitle"/>
+                                <form:SimpleForm id="_IDGenSimpleForm01"
+                                    minWidth="1024"
+                                    maxContainerCols="2"
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    columnsL="1"
+                                    columnsM="1">
+                                    <form:content>
+                                        <m:Label id="_IDGenLabel2" text="{i18n>zoneName}"/>
+                                        <m:Input id="zoneName" required="true" value="{ZoneInfo>/name}" editable="false" placeholder="{i18n>namePlaceholder}"/>
+                                    </form:content>
+                                </form:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" id="siteInfoSection" title="{i18n>associatedSite}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection2">
+                        <form:SimpleForm id="_IDGenSimpleForm02"
+                            minWidth="1024"
+                            maxContainerCols="2"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            columnsL="1"
+                            columnsM="1">
+                            <form:content>
+                                <m:Label id="_IDGenLabel5" text="{i18n>zoneName}"/>
+                                <m:Input id="siteNameDetail" value="{ZoneInfo>/site/name}" editable="false"/>
+                                <m:Label id="_IDGenLabel6" text="{i18n>siteType}"/>
+					            <m:Input id="siteType" value="{ZoneInfo>/site/siteType}" editable="false"/>
+                                <m:Label id="_IDGenLabel7" text="{i18n>siteCeCo}"/>
+					            <m:Input id="costCenter" value="{ZoneInfo>/site/costCenter}" editable="false"/>
+                                <m:Label id="_IDGenLabel8" text="{i18n>siteID}"/>
+					            <m:Input id="siteIDDetail" value="{ZoneInfo>/site/ID}" editable="false"/>
+                            </form:content>						
+                        </form:SimpleForm>
+                    </ObjectPageSubSection>			
+                </subSections>
+            </ObjectPageSection>
+        </sections>       
+        
+    </ObjectPageLayout>
+</mvc:View>

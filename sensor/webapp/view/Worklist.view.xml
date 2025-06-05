@@ -1,0 +1,145 @@
+<mvc:View
+    controllerName="globalhitss.ee.sensor.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+    <App id="App">
+        <Page id="Page" title="{i18n>worklistTitle}">
+            <FlexBox id="FlexBox" 
+                direction="Row"
+                justifyContent="SpaceAround"
+                alignItems="Center"
+                wrap="Wrap">
+                <Title
+                    id="tableHeader"
+                    text="{worklistView>/worklistTableTitle}"
+                    level="H3"/>
+                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                <Button id="_IDGenButton" icon="sap-icon://write-new" text="Crear Nuevo Sensor" type="Transparent" press=".handlePopoverPress"/>
+                <SearchField
+                    id="searchField"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    placeholder="{i18n>searchPlaceHolder}"
+                    search=".onSearch">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <ComboBox
+                    showSecondaryValues= "true"
+                    id="searchSiteComboBox"
+                    width="240px"
+                    items="{ path: '/SiteCollection' }"
+                    tooltip="{i18n>worklistSearchSiteTooltip}"
+                    placeholder="{i18n>searchSitePlaceHolder}"
+                    change=".onSearchSiteCombo"
+                    selectionChange=".onSelectionChange">
+                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{name}" additionalText="{costCenter}"/>
+                </ComboBox>
+                <SearchField
+                    id="searchCostCenter"
+                    tooltip="{i18n>worklistSearchCostCenterTooltip}"
+                    placeholder="{i18n>searchCostCenter}"
+                    search=".onSearchCostCenter">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <SearchField
+                    id="searchTypeField"
+                    tooltip="{i18n>worklistSearchTypeTooltip}"
+                    placeholder="{i18n>searchTypePlaceHolder}"
+                    search=".onSearchType">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <!-- <SearchField
+                    id="searchSerialNumberField"
+                    tooltip="{i18n>worklistSearchSerialNumberTooltip}"
+                    placeholder="{i18n>searchSerialNumberPlaceHolder}"
+                    search=".onSearchSerialNumber">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField> -->
+                <Switch 
+                    id="deleteRecords" 
+                    tooltip="{i18n>deleteRecords}" 
+                    change="handleChangeSwitch"
+                    class="customSwitch">
+                </Switch>
+            </FlexBox>
+            <Table
+                id="table"
+                width="auto"
+                items="{
+                    path: 'Sensors>/',
+                    sorter: {
+                        path: 'name',
+                        descending: false
+                    }
+                }"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                growingThreshold="20"
+                updateFinished=".onUpdateFinished">
+
+                <columns>
+                    <Column id="friendlyNameCol">
+                        <Text text="{i18n>sensorName}" id="friendlyNameText"/>
+                    </Column>
+                    <Column id="businessNameCol">
+                        <Text text="{i18n>sensorService}" id="businessNameText"/>
+                    </Column>
+                    <Column id="siteNameCol">
+                        <Text text="{i18n>site}" id="siteNameText"/>
+                    </Column>
+                    <Column id="costCenterCol">
+                        <Text text="{i18n>costCenter}" id="costCenterText"/>
+                    </Column>
+                    <Column id="siteSerialNumberCol">
+                        <Text text="{i18n>serialNumber}" id="siteSerialNumberText"/>
+                    </Column>
+                    <Column id="sensorTypeCol">
+                        <Text text="{i18n>sensorType}" id="sensorTypeText"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1"
+                        type="Navigation"
+                        press=".onPress">
+                        <cells>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier1"
+                                title="{Sensors>name}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier2"
+                                title="{Sensors>sensorType}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier3"
+                                title="{Sensors>site/name}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier4"
+                                title="{Sensors>site/costCenter}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier5"
+                                title="{Sensors>serialNumber}"/>
+                            <ObjectIdentifier id="_IDGenObjectIdentifier6"
+                                title="{Sensors>type}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Page>
+    </App>
+
+</mvc:View>
