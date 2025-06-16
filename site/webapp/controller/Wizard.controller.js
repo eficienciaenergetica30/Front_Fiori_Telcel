@@ -170,6 +170,7 @@ sap.ui.define([
             let that = this,
                 aName = that.getView().byId('siteNameInput').getValue(),
                 aSiteType = that.getView().byId('siteTypeComboBox').getValue(),
+                aAccount = that.getView().byId('accountInput').getValue(),
                 aSiteBusinessUnit = that.getView().byId('siteBusinessUnitComboBox').getValue(),
                 aSiteFormat = that.getView().byId('siteFormatComboBox').getValue(),
                 aSiteRPU = that.getView().byId('siteRPUInput').getValue(),
@@ -190,6 +191,12 @@ sap.ui.define([
                 that.model.setProperty("/siteTypeState","Error");
             } else {
                 that.model.setProperty("/siteTypeState","None");
+            }
+
+            if(aAccount.length < 16) {
+                that.model.setProperty("/accountState","Error");
+            } else {
+                that.model.setProperty("/accountState","None");
             }
 
             if(aSiteBusinessUnit == "") {
@@ -246,7 +253,7 @@ sap.ui.define([
                 that.model.setProperty("/siteManagerState","None");
             }
 
-            if(aName.length < 4 || aSiteType == "" || aSiteBusinessUnit == "" || aSiteFormat == "" || aSiteRPU.length < 12 || aSiteDivision == "" || aSiteRegion == "" || aSiteCostCenter.length < 4 || aSiteCostCenterEg.length < 4 || aSiteStatus == "" || aSiteManager == "") {
+            if(aName.length < 4 || aSiteType == "" || aAccount.length < 16 || aSiteBusinessUnit == "" || aSiteFormat == "" || aSiteRPU.length < 12 || aSiteDivision == "" || aSiteRegion == "" || aSiteCostCenter.length < 4 || aSiteCostCenterEg.length < 4 || aSiteStatus == "" || aSiteManager == "") {
                 this._wizard.invalidateStep(this.byId("SiteInfoStep"));
             } else {
                 this._wizard.validateStep(this.byId("SiteInfoStep"));
@@ -330,6 +337,87 @@ sap.ui.define([
                 this._wizard.invalidateStep(this.byId("AddressStep"));
             } else {
                 this._wizard.validateStep(this.byId("AddressStep"));
+            }
+
+        },
+
+        stepCFEAddressValidation: function() {
+            let that = this,
+                aCountry      = that.getView().byId('countryComboBoxCFE').getValue(),
+                aState        = that.getView().byId('stateComboBoxCFE').getValue(),
+                aTown         = that.getView().byId('townComboBoxCFE').getValue(),
+                aPostalCode   = that.getView().byId('postalCodeComboBoxCFE').getValue(),
+                aNeighborhood = that.getView().byId('neighborhoodComboBoxCFE').getValue(),
+                aStreet       = that.getView().byId('streetInputCFE').getValue(),
+                aExtNumber    = that.getView().byId('numberInputCFE').getValue();
+                
+
+            if(aCountry == "") {
+                that.model.setProperty("/countryStateCFE","Error");
+            } else {
+                that.model.setProperty("/countryStateCFE","None");
+            }
+
+            if(aState == "") {
+                that.model.setProperty("/stateStateCFE","Error");
+                if(aCountry != ""){
+                    return new Promise(function(fnResolve, fnReject) {
+                        fnResolve(that.selectedCountry());
+                    });
+                }
+            } else {
+                that.model.setProperty("/stateStateCFE","None");
+            }
+
+            if(aTown == "") {
+                that.model.setProperty("/townStateCFE","Error");
+                if(aCountry != ""){
+                    return new Promise(function(fnResolve, fnReject) {
+                        fnResolve(that.selectedState());
+                    });
+                }
+            } else {
+                that.model.setProperty("/townStateCFE","None");
+            }
+
+            if(aPostalCode == "") {
+                that.model.setProperty("/postalCodeStateCFE","Error");
+                if(aTown != ""){
+                    return new Promise(function(fnResolve, fnReject) {
+                        fnResolve(that.selectedTown());
+                    });
+                }
+            } else {
+                that.model.setProperty("/postalCodeStateCFE","None");
+            }
+
+            if(aNeighborhood == "") {
+                that.model.setProperty("/neighborhoodStateCFE","Error");
+                if(aPostalCode != ""){
+                    return new Promise(function(fnResolve, fnReject) {
+                        fnResolve(that.selectedPostalCode());
+                    });
+                }
+            } else {
+                that.model.setProperty("/neighborhoodStateCFE","None");
+            }
+
+            if(aStreet.length < 4) {
+                that.model.setProperty("/streetStateCFE","Error");
+            } else {
+                that.model.setProperty("/streetStateCFE","None");
+            }
+
+            if(aExtNumber.length < 1) {
+                that.model.setProperty("/extNumberStateCFE","Error");
+            } else {
+                that.model.setProperty("/extNumberStateCFE","None");
+            }
+
+            if(aCountry == "" || aState == "" || aTown == "" || aPostalCode == "" || aNeighborhood == "" || aStreet.length < 4 || aExtNumber.length < 1) {
+                this._wizard.invalidateStep(this.byId("AddressCFEStep"));
+            } else {
+                this._wizard.validateStep(this.byId("AddressCFEStep"));
             }
 
         },
@@ -574,6 +662,10 @@ sap.ui.define([
         this._handleNavigationToStep(5);
     },
 
+    editStepSeven: function () {
+        this._handleNavigationToStep(6);
+    },
+
     _handleNavigationToStep: function (iStepNumber) {
         var fnAfterNavigate = function () {
             this._wizard.goToStep(this._wizard.getSteps()[iStepNumber]);
@@ -625,14 +717,23 @@ sap.ui.define([
                         that.byId("companyNameChoosen").setText(data.CompanyID),
                         that.byId("siteNameChosen").setText(data.Name),
                         that.byId("siteTypeChosen").setText(data.SiteType),
+                        that.byId("meterChosen").setText(data.Meter),
+                        that.byId("accountChosen").setText(data.Account),
+                        that.byId("companyDivisionChosen").setText(data.CompanyDivision),
                         that.byId("siteBusinessUnitChosen").setText(data.BusinessUnit),
                         that.byId("siteFormatChosen").setText(data.Format),
                         that.byId("siteRPUChosen").setText(data.RPU),
                         that.byId("siteDivisionChosen").setText(data.Division),
+                        that.byId("corporationChosen").setText(data.Corporation),
                         that.byId("siteFareChosen").setText(data.Fare),
                         that.byId("siteRegionChosen").setText(data.Region),
+                        that.byId("externalIdChosen").setText(data.ExternalId),
                         that.byId("siteCostCenterChosen").setText(data.CostCenter),
                         that.byId("siteCostCenterEgChosen").setText(data.CostCenterEg),
+                        that.byId("sapAccountChosen").setText(data.SapAccount),
+                        that.byId("supplierChosen").setText(data.Supplier),
+                        that.byId("folio1Chosen").setText(data.Folio1),
+                        that.byId("folio2Chosen").setText(data.Folio2),
                         that.byId("timeZoneChosen").setText(data.TimeZone),
                         that.byId("openHourChosen").setText(data.OpenHour),
                         that.byId("closeHourChosen").setText(data.CloseHour),
@@ -650,6 +751,14 @@ sap.ui.define([
                         that.byId("streetChosen").setText(data.Address.Street),
                         that.byId("numberChosen").setText(data.Address.ExtNumber),
                         that.byId("intNumberChosen").setText(data.Address.IntNumber),
+                        that.byId("countryChosenCFE").setText(data.AddressCFE.Country),
+                        that.byId("stateChosenCFE").setText(data.AddressCFE.State),
+                        that.byId("townChosenCFE").setText(data.AddressCFE.Town),
+                        that.byId("postalCodeChosenCFE").setText(data.AddressCFE.PostalCode),
+                        that.byId("neighborhoodChosenCFE").setText(data.AddressCFE.Neighborhood),
+                        that.byId("streetChosenCFE").setText(data.AddressCFE.Street),
+                        that.byId("numberChosenCFE").setText(data.AddressCFE.ExtNumber),
+                        that.byId("intNumberChosenCFE").setText(data.AddressCFE.IntNumber),
                         that.byId("latitudeChosen").setText(data.Address.Latitude),
                         that.byId("longitudeChosen").setText(data.Address.Longitude),
                         that.byId("electricSupplierChosen").setText(data.ElectricSupplier[0]),
@@ -688,7 +797,7 @@ sap.ui.define([
                     async: false, 
                     success : function(data, textStatus, jqXHR) {
                         console.log(data);
-                        MessageBox.success("El sitio " + data.name + " con ID " + data.ID + " se ha creado correctamente", {
+                        MessageBox.success("El sitio " + data.Name + " con ID " + data.ID + " se ha creado correctamente", {
                             actions: [MessageBox.Action.OK],
                             emphasizedAction: MessageBox.Action.OK,
                             onClose: function (sAction) {

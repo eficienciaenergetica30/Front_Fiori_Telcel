@@ -26,8 +26,8 @@
                 <actions>
 					<m:Button id="editButton" icon="sap-icon://edit" text="{i18n>editButton}" type="Emphasized" press="editObject"/>
 					<m:Button id="saveButton" icon="sap-icon://save" text="{i18n>saveButton}" type="Accept" press="saveEditedObject"/>
-                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${ZoneInfo>/deletionRequest} === 0 ? true : false}"/>
-                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${ZoneInfo>/deletionRequest} === 1 ? true : false}"/>
+                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${ZoneInfo>/DeletionRequest} === 0 ? true : false}"/>
+                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${ZoneInfo>/DeletionRequest} === 1 ? true : false}"/>
 				</actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
@@ -65,7 +65,7 @@
                                     columnsM="1">
                                     <form:content>
                                         <m:Label id="_IDGenLabel2" text="{i18n>zoneName}"/>
-                                        <m:Input id="zoneName" required="true" value="{ZoneInfo>/name}" editable="false" placeholder="{i18n>namePlaceholder}"/>
+                                        <m:Input id="zoneName" required="true" value="{ZoneInfo>/Name}" editable="false" placeholder="{i18n>namePlaceholder}"/>
                                     </form:content>
                                 </form:SimpleForm>
                             </m:VBox>
@@ -90,13 +90,13 @@
                             columnsM="1">
                             <form:content>
                                 <m:Label id="_IDGenLabel5" text="{i18n>zoneName}"/>
-                                <m:Input id="siteNameDetail" value="{ZoneInfo>/site/name}" editable="false"/>
+                                <m:Input id="siteNameDetail" value="{ZoneInfo>/Site/Name}" editable="false"/>
                                 <m:Label id="_IDGenLabel6" text="{i18n>siteType}"/>
-					            <m:Input id="siteType" value="{ZoneInfo>/site/siteType}" editable="false"/>
+					            <m:Input id="siteType" value="{ZoneInfo>/Site/SiteType}" editable="false"/>
                                 <m:Label id="_IDGenLabel7" text="{i18n>siteCeCo}"/>
-					            <m:Input id="costCenter" value="{ZoneInfo>/site/costCenter}" editable="false"/>
+					            <m:Input id="costCenter" value="{ZoneInfo>/Site/CostCenter}" editable="false"/>
                                 <m:Label id="_IDGenLabel8" text="{i18n>siteID}"/>
-					            <m:Input id="siteIDDetail" value="{ZoneInfo>/site/ID}" editable="false"/>
+					            <m:Input id="siteIDDetail" value="{ZoneInfo>/Site/ID}" editable="false"/>
                             </form:content>						
                         </form:SimpleForm>
                     </ObjectPageSubSection>			

@@ -15,8 +15,8 @@
                     id="tableHeader"
                     text="{worklistView>/worklistTableTitle}"
                     level="H3"/>
-                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                    <Button id="_IDGenButton1" icon="sap-icon://write-new" text="Crear Nuevo Sitio" type="Transparent" press=".onCreate"/>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                    <Button id="_IDGenButton" icon="sap-icon://write-new" text="Crear Nuevo Sitio" type="Transparent" press=".onCreate"/>
                 <SearchField
                     id="searchFieldName"
                     placeholder="{i18n>worklistSearchName}"

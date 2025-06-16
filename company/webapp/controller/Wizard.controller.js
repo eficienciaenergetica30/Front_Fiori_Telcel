@@ -331,7 +331,7 @@ sap.ui.define([
                         async: false,
                         success: function (data, textStatus, jqXHR) {
                             console.log(data);
-                            MessageBox.success("La compañía " + data.friendlyName + " con ID " + data.ID + " se ha creado", {
+                            MessageBox.success("La compañía " + data.FriendlyName + " con ID " + data.ID + " se ha creado", {
                                 actions: [MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,
                                 onClose: function (sAction) {

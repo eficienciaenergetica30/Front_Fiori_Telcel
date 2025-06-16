@@ -187,14 +187,23 @@ sap.ui.define([
             let that = this;
             that.getView().byId("InputSiteName").setEditable(true);
             that.getView().byId("friendlyName").setEditable(true);
+            that.getView().byId("meter").setEditable(true);
+            that.getView().byId("account").setEditable(true);
+            that.getView().byId("companyDivision").setEditable(true);
+            that.getView().byId("corporation").setEditable(true);
             that.getView().byId("businessUnit").setEditable(true);
             that.getView().byId("format").setEditable(true);
             that.getView().byId("rpu").setEditable(true);
             that.getView().byId("division").setEditable(true);
             that.getView().byId("fare").setEditable(true);
             that.getView().byId("region").setEditable(true);
+            that.getView().byId("externalId").setEditable(true);
             that.getView().byId("costCenter").setEditable(true);
             that.getView().byId("costCenterEg").setEditable(true);
+            that.getView().byId("sapAccount").setEditable(true);
+            that.getView().byId("supplier").setEditable(true);
+            that.getView().byId("folio1").setEditable(true);
+            that.getView().byId("folio2").setEditable(true);
             that.getView().byId("siteType").setEditable(true);
             that.getView().byId("timeZone").setEditable(true);
             that.getView().byId("openHour").setEditable(true);
@@ -214,6 +223,14 @@ sap.ui.define([
             that.getView().byId("intNumber").setEditable(true);
             that.getView().byId("latitude").setEditable(true);
             that.getView().byId("longitude").setEditable(true);
+            that.getView().byId("countryCFE").setEditable(true);
+            that.getView().byId("stateCFE").setEditable(true);
+            that.getView().byId("townCFE").setEditable(true);
+            that.getView().byId("postalCodeCFE").setEditable(true);
+            that.getView().byId("neighborhoodCFE").setEditable(true);
+            that.getView().byId("streetCFE").setEditable(true);
+            that.getView().byId("extNumberCFE").setEditable(true);
+            that.getView().byId("intNumberCFE").setEditable(true);
             that.getView().byId("constructedArea").setEditable(true);
             that.getView().byId("contact").setEditable(true);
             that.getView().byId("contactPhone").setEditable(true);
@@ -251,9 +268,10 @@ sap.ui.define([
             else comboboxFriendly.setValueState(ValueState.None);
             
             that.getSiteById(id).then(function (res) {
-                addressID = res[0].addressID;
-                gatewayID = res[0].gatewayID;
-                simID = res[0].simID;
+                addressID = res[0].AddressID;
+                addressCFE = res[0].AddressCFE;
+                gatewayID = res[0].GatewayID;
+                simID = res[0].SimID;
                 let data = {
                     ID: id,
                     Name: that.getView().byId("InputSiteName").getValue(),
@@ -263,6 +281,14 @@ sap.ui.define([
                     Division: that.getView().byId("division").getValue(),
                     Fare: that.getView().byId("fare").getValue(),
                     Region: that.getView().byId("region").getValue(),
+                    Meter: that.getView().byId("meter").getValue(),
+                    Account: that.getView().byId("account").getValue(),
+                    CompanyDivision: that.getView().byId("companyDivision").getValue(),
+                    Corporation: that.getView().byId("corporation").getValue(),
+                    SapAccount: that.getView().byId("sapAccount").getValue(),
+                    Supplier: that.getView().byId("supplier").getValue(),
+                    Folio1: that.getView().byId("folio1").getValue(),
+                    Folio2: that.getView().byId("folio2").getValue(),
                     CostCenter: that.getView().byId("costCenter").getValue(),
                     SiteType: that.getView().byId("siteType").getValue(),
                     TimeZone: that.getView().byId("timeZone").getValue(),
@@ -282,6 +308,7 @@ sap.ui.define([
                     GasSupplier: [that.getView().byId("gasSupplier").getValue()],
                     WaterSupplier: [that.getView().byId("waterSupplier").getValue()],
                     AddressID: addressID,
+                    addressCFE: AddressCFE,
                     CompanyID: companyID,
                     GatewayID: gatewayID,
                     SimID: simID,
@@ -298,6 +325,18 @@ sap.ui.define([
                         IntNumber: that.getView().byId("intNumber").getValue(),
                         Latitude: parseFloat(that.getView().byId("latitude").getValue()),
                         Longitude: parseFloat(that.getView().byId("longitude").getValue()),
+                    },
+                    AddressCFE: {
+                        ID: addressCFE,
+                        AddressType: "cfe",
+                        Country: that.getView().byId("countryCFE").getValue(),
+                        State: that.getView().byId("stateCFE").getValue(),
+                        Town: that.getView().byId("townCFE").getValue(),
+                        PostalCode: that.getView().byId("postalCodeCFE").getValue(),
+                        Neighborhood: that.getView().byId("neighborhoodCFE").getValue(),
+                        Street: that.getView().byId("streetCFE").getValue(),
+                        ExtNumber: that.getView().byId("extNumberCFE").getValue(),
+                        IntNumber: that.getView().byId("intNumberCFE").getValue(),
                     },
                     Gateway: [
                         {
@@ -325,7 +364,7 @@ sap.ui.define([
                         async: false,
                         success: function (data, textStatus, jqXHR) {
                             console.log(data);
-                            let messageText = "El sitio " + data.name + " con ID " + data.ID + " se ha modificado correctamente";
+                            let messageText = "El sitio " + data.Name + " con ID " + data.ID + " se ha modificado correctamente";
                             MessageBox.success(messageText, {
                                 actions: [MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,
@@ -351,14 +390,23 @@ sap.ui.define([
             let that = this;
             that.getView().byId("InputSiteName").setEditable(false);
             that.getView().byId("friendlyName").setEditable(false);
+            that.getView().byId("meter").setEditable(false);
+            that.getView().byId("account").setEditable(false);
+            that.getView().byId("companyDivision").setEditable(false);
+            that.getView().byId("corporation").setEditable(false);
             that.getView().byId("businessUnit").setEditable(false);
             that.getView().byId("format").setEditable(false);
             that.getView().byId("rpu").setEditable(false);
             that.getView().byId("division").setEditable(false);
             that.getView().byId("fare").setEditable(false);
             that.getView().byId("region").setEditable(false);
+            that.getView().byId("externalId").setEditable(false);
             that.getView().byId("costCenter").setEditable(false);
             that.getView().byId("costCenterEg").setEditable(false);
+            that.getView().byId("sapAccount").setEditable(false);
+            that.getView().byId("supplier").setEditable(false);
+            that.getView().byId("folio1").setEditable(false);
+            that.getView().byId("folio2").setEditable(false);
             that.getView().byId("siteType").setEditable(false);
             that.getView().byId("timeZone").setEditable(false);
             that.getView().byId("openHour").setEditable(false);
@@ -378,6 +426,14 @@ sap.ui.define([
             that.getView().byId("intNumber").setEditable(false);
             that.getView().byId("latitude").setEditable(false);
             that.getView().byId("longitude").setEditable(false);
+            that.getView().byId("countryCFE").setEditable(false);
+            that.getView().byId("stateCFE").setEditable(false);
+            that.getView().byId("townCFE").setEditable(false);
+            that.getView().byId("postalCodeCFE").setEditable(false);
+            that.getView().byId("neighborhoodCFE").setEditable(false);
+            that.getView().byId("streetCFE").setEditable(false);
+            that.getView().byId("extNumberCFE").setEditable(false);
+            that.getView().byId("intNumberCFE").setEditable(false);
             that.getView().byId("constructedArea").setEditable(false);
             that.getView().byId("contact").setEditable(false);
             that.getView().byId("contactPhone").setEditable(false);
@@ -430,7 +486,7 @@ sap.ui.define([
                     async: false,
                     success: function (data, textStatus, jqXHR) {
                         console.log(data);
-                        let messageText = "El sitio " + data.name + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
+                        let messageText = "El sitio " + data.Name + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
                         MessageBox.success(messageText, {
                             actions: [MessageBox.Action.OK],
                             emphasizedAction: MessageBox.Action.OK,

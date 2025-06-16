@@ -38,7 +38,7 @@
                     placeholder="{i18n>searchSitePlaceHolder}"
                     change=".onSearchSiteCombo"
                     selectionChange=".onSelectionChange">
-                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{name}" additionalText="{costCenter}"/>
+                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{Name}" additionalText="{CostCenter}"/>
                 </ComboBox>
                 <SearchField
                     id="searchCostCenter"
@@ -86,7 +86,7 @@
                 items="{
                     path: 'Sensors>/',
                     sorter: {
-                        path: 'name',
+                        path: 'Name',
                         descending: false
                     }
                 }"
@@ -124,17 +124,17 @@
                         press=".onPress">
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier1"
-                                title="{Sensors>name}"/>
+                                title="{Sensors>Name}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier2"
-                                title="{Sensors>sensorType}"/>
+                                title="{Sensors>SensorType}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier3"
-                                title="{Sensors>site/name}"/>
+                                title="{Sensors>Site/Name}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier4"
-                                title="{Sensors>site/costCenter}"/>
+                                title="{Sensors>Site/CostCenter}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier5"
-                                title="{Sensors>serialNumber}"/>
+                                title="{Sensors>SerialNumber}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier6"
-                                title="{Sensors>type}"/>
+                                title="{Sensors>Type}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
