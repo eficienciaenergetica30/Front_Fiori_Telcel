@@ -4,25 +4,43 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:semantic="sap.f.semantic">
 
-   <semantic:SemanticPage
-        id="page"
-        headerPinnable="false"
-        toggleHeaderOnTitleClick="false">
-
-        <semantic:titleHeading>
-            <Title id="_IDGenTitle1"
-                text="{i18n>worklistTitle}"
-                level="H2"/>
-        </semantic:titleHeading>
-
-        <semantic:content>
+    <App id="App">
+        <Page id="Page" title="{i18n>worklistTitle}">
+            <FlexBox id="FlexBox" 
+                direction="Row"
+                justifyContent="SpaceAround"
+                alignItems="Center"
+                wrap="Wrap">
+                <Title 
+                    id="_IDGenTitle1"
+                    text="{i18n>worklistTitle}"
+                    level="H3"/>
+                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <Button id="_IDGenButton11" icon="sap-icon://write-new" text="Crear Nueva Compañía" type="Transparent" press=".onCreate"/>
+                <SearchField
+                    id="searchField"
+                    tooltip="{i18n>worklistSearchTooltip}"
+                    placeholder="{i18n>searchPlaceHolder}"
+                    search=".onSearch">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
+                            maxWidth="240px"
+                            priority="NeverOverflow"/>
+                    </layoutData>
+                </SearchField>
+                <Switch 
+                    id="deleteRecords" 
+                    tooltip="{i18n>deleteRecords}" 
+                    change="handleChangeSwitch">
+                </Switch>
+            </FlexBox>
             <Table
                 id="table"
                 width="auto"
                 items="{
                     path: 'Companies>/',
                     sorter: {
-                        path: 'friendlyName',
+                        path: 'FriendlyName',
                         descending: false
                     }
                 }"
@@ -32,32 +50,6 @@
                 growingScrollToLoad="true"
                 growingThreshold="20"
                 updateFinished=".onUpdateFinished">
-
-                <headerToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar1">
-                        <Title
-                            id="tableHeader"
-                            text="{worklistView>/worklistTableTitle}"
-                            level="H3"/>
-                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                        <Button id="_IDGenButton1" icon="sap-icon://write-new" text="Crear Nueva Compañía" type="Transparent" press=".onCreate"/>
-                        <SearchField
-                            id="searchField"
-                            tooltip="{i18n>worklistSearchTooltip}"
-                            search=".onSearch">
-                            <layoutData>
-                                <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
-                                    maxWidth="200px"
-                                    priority="NeverOverflow"/>
-                            </layoutData>
-                        </SearchField>
-                        <Switch 
-                            id="deleteRecords" 
-                            tooltip="{i18n>deleteRecords}" 
-                            change="handleChangeSwitch">
-                        </Switch>
-                    </OverflowToolbar>
-                </headerToolbar>
 
                 <columns>
                     <Column id="friendlyNameCol">
@@ -80,19 +72,18 @@
                         press=".onPress">
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier1"
-                                title="{Companies>friendlyName}"/>
+                                title="{Companies>FriendlyName}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier2"
-                                title="{Companies>businessName}"/>
+                                title="{Companies>BusinessName}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier3"
-                                title="{Companies>address/country}"/>
+                                title="{Companies>Address/Country}"/>
                             <ObjectIdentifier id="_IDGenObjectIdentifier4"
-                                title="{Companies>address/state}"/>
+                                title="{Companies>Address/State}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-        </semantic:content>
-
-    </semantic:SemanticPage>
+        </Page>
+    </App>
 
 </mvc:View>

@@ -583,7 +583,7 @@ sap.ui.define([
                     data : JSON.stringify(zone),
                     async: false, 
                     success : function(data, textStatus, jqXHR) {
-                        MessageBox.success("La zona " + data.name + " con ID " + data.ID + " se ha creado", {
+                        MessageBox.success("La zona " + data.Name + " con ID " + data.ID + " se ha creado", {
                             actions: [MessageBox.Action.OK],
                             onClose: function(oAction) {
                                 if (oAction === MessageBox.Action.OK) {

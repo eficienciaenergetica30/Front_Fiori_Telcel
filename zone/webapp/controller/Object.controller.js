@@ -190,7 +190,7 @@ sap.ui.define([
                     async: false,
                     success: function (data, textStatus, jqXHR) {
                         console.log(data);
-                        let messageText = "La zona " + data.name + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
+                        let messageText = "La zona " + data.Name + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
                         MessageBox.success(messageText, {
                             actions: [MessageBox.Action.OK],
                             emphasizedAction: MessageBox.Action.OK,
@@ -280,7 +280,7 @@ sap.ui.define([
                         data : JSON.stringify(zone.zoneData),
                         async: false, 
                         success : function(data, textStatus, jqXHR) {
-                            let messageText = "La zona " + data.name + " con ID " + data.ID + " se ha modificado correctamente";
+                            let messageText = "La zona " + data.Name + " con ID " + data.ID + " se ha modificado correctamente";
                             MessageBox.success(messageText, {
                                 actions: [MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,

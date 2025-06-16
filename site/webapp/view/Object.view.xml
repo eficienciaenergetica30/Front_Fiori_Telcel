@@ -27,8 +27,8 @@
                 <actions>
 					<m:Button id="editButton" icon="sap-icon://edit" text="{i18n>editButton}" type="Emphasized" press="editObject"/>
 					<m:Button id="saveButton" icon="sap-icon://save" text="{i18n>saveButton}" type="Accept" press="saveEditedObject"/>
-                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${SiteInfo>/deletionRequest} === 0 ? true : false}"/>
-                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${SiteInfo>/deletionRequest} === 1 ? true : false}"/>
+                    <m:Button id="deleteButton" icon="sap-icon://delete" text="{i18n>deleteButton}" type="Reject" press="softDeleteObject" visible="{= ${SiteInfo>/DeletionRequest} === 0 ? true : false}"/>
+                    <m:Button id="restoreButton" icon="sap-icon://refresh" text="{i18n>restoreButton}" type="Default" press="restoreObject" visible="{= ${SiteInfo>/DeletionRequest} === 1 ? true : false}"/>
 				</actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
@@ -65,9 +65,9 @@
                                     columnsL="1"
                                     columnsM="1">
                                     <form:content>
-                                        <m:Label id="_IDGenLabel12" text="{i18n>companyBusinessName}"/>
-                                        <m:Input id="businessName" value="{SiteInfo>/company/businessName}" editable="false"/>
-                                        <m:Label id="_IDGenLabel13" text="{i18n>companyName}"/>
+                                        <m:Label id="_IDLabel1" text="{i18n>companyBusinessName}"/>
+                                        <m:Input id="businessName" value="{SiteInfo>/Company/BusinessName}" editable="false"/>
+                                        <m:Label id="_IDLabel2" text="{i18n>companyName}"/>
                                         <m:ComboBox
                                             showSecondaryValues= "true"
                                             id="friendlyName"
@@ -79,7 +79,7 @@
                                             placeholder="{i18n>companyPlaceHolder}"
                                             change="friendlyNameChange"
                                             editable="false">
-                                            <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{friendlyName}" additionalText = "{businessName}"/>
+                                            <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{FriendlyName}" additionalText = "{BusinessName}"/>
                                         </m:ComboBox>
                                     </form:content>						
                                 </form:SimpleForm>
@@ -104,33 +104,51 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabelName" text="{i18n>siteName}"/>
-                                <m:Input id="InputSiteName" value="{SiteInfo>/name}" editable="false"/>
-                                <m:Label id="_IDGenLabelBusinessUnit" text="{i18n>businessUnit}"/>
-					            <m:Input id="businessUnit" value="{SiteInfo>/businessUnit}" editable="false"/>
-                                <m:Label id="_IDGenLabelFormat" text="{i18n>siteFormat}"/>
-					            <m:Input id="format" value="{SiteInfo>/format}" editable="false"/>
-                                <m:Label id="_IDGenLabel19" text="{i18n>rpu}"/>
+                                <m:Label id="_IDLabel11" text="{i18n>siteName}"/>
+                                <m:Input id="InputSiteName" value="{SiteInfo>/Name}" editable="false"/>
+                                <m:Label id="_IDLabel12" text="{i18n>siteType}"/>
+                                <m:Input id="siteType" value="{SiteInfo>/SiteType}" editable="false"/>
+                                <m:Label id="_IDLabel13" text="{i18n>meter}"/>
+                                <m:Input id="meter" value="{SiteInfo>/Meter}" editable="false"/>
+                                <m:Label id="_IDLabel14" text="{i18n>account}"/>
+                                <m:Input id="account" value="{SiteInfo>/Account}" editable="false"/>
+                                <m:Label id="_IDLabel15" text="{i18n>companyDivision}"/>
+                                <m:Input id="companyDivision" value="{SiteInfo>/CompanyDivision}" editable="false"/>
+                                <m:Label id="_IDLabel16" text="{i18n>corporation}"/>
+                                <m:Input id="corporation" value="{SiteInfo>/Corporation}" editable="false"/>
+                                <m:Label id="_IDLabel17" text="{i18n>businessUnit}"/>
+					            <m:Input id="businessUnit" value="{SiteInfo>/BusinessUnit}" editable="false"/>
+                                <m:Label id="_IDLabel18" text="{i18n>siteFormat}"/>
+					            <m:Input id="format" value="{SiteInfo>/Format}" editable="false"/>
+                                <m:Label id="_IDLabel19" text="{i18n>rpu}"/>
                                 <m:Input id="rpu" value="{SiteInfo>/RPU}" editable="false"/>
-                                <m:Label id="_IDGenLabel20" text="{i18n>division}"/>
-                                <m:Input id="division" value="{SiteInfo>/division}" editable="false"/>
-                                <m:Label id="_IDGenLabelFare" text="{i18n>fare}"/>
-                                <m:Input id="fare" value="{SiteInfo>/fare}" editable="false"/>
-                                <m:Label id="_IDGenLabel21" text="{i18n>region}"/>
-                                <m:Input id="region" value="{SiteInfo>/region}" editable="false"/>
-                                <m:Label id="_IDGenLabel22" text="{i18n>siteCostCenter}"/>
-                                <m:Input id="costCenter" value="{SiteInfo>/costCenter}" editable="false"/>
-                                <m:Label id="_IDGenLabel23" text="{i18n>siteCostCenterEg}"/>
-                                <m:Input id="costCenterEg" value="{SiteInfo>/costCenterEg}" editable="false"/>
-                                <m:Label id="_IDGenLabel24" text="{i18n>siteType}"/>
-                                <m:Input id="siteType" value="{SiteInfo>/siteType}" editable="false"/>
-                                <m:Label id="_IDGenLabel25" text="{i18n>timeZone}"/>
-                                <m:Input id="timeZone" value="{SiteInfo>/timeZone}" editable="false"/>
-                                <m:Label id="_IDGenLabel26" text="{i18n>openHour}"/>
-                                <m:Input id="openHour" value="{SiteInfo>/openHour}" editable="false"/>
-                                <m:Label id="_IDGenLabel27" text="{i18n>closeHour}"/>
-                                <m:Input id="closeHour" value="{SiteInfo>/closeHour}" editable="false"/>
-                                <m:Label id="_IDGenLabel28" text="{i18n>status}"/>
+                                <m:Label id="_IDLabel20" text="{i18n>division}"/>
+                                <m:Input id="division" value="{SiteInfo>/Division}" editable="false"/>
+                                <m:Label id="_IDLabel21" text="{i18n>fare}"/>
+                                <m:Input id="fare" value="{SiteInfo>/Fare}" editable="false"/>
+                                <m:Label id="_IDLabel22" text="{i18n>region}"/>
+                                <m:Input id="region" value="{SiteInfo>/Region}" editable="false"/>
+                                <m:Label id="_IDLabel23" text="{i18n>externalId}"/>
+                                <m:Input id="externalId" value="{SiteInfo>/ExternalId}" editable="false"/>
+                                <m:Label id="_IDLabel24" text="{i18n>siteCostCenter}"/>
+                                <m:Input id="costCenter" value="{SiteInfo>/CostCenter}" editable="false"/>
+                                <m:Label id="_IDLabel25" text="{i18n>siteCostCenterEg}"/>
+                                <m:Input id="costCenterEg" value="{SiteInfo>/CostCenterEg}" editable="false"/>
+                                <m:Label id="_IDLabel26" text="{i18n>sapAccount}"/>
+                                <m:Input id="sapAccount" value="{SiteInfo>/SapAccount}" editable="false"/>
+                                <m:Label id="_IDLabel27" text="{i18n>supplier}"/>
+                                <m:Input id="supplier" value="{SiteInfo>/Supplier}" editable="false"/>
+                                <m:Label id="_IDLabel28" text="{i18n>folio1}"/>
+                                <m:Input id="folio1" value="{SiteInfo>/Folio1}" editable="false"/>
+                                <m:Label id="_IDLabel29" text="{i18n>folio2}"/>
+                                <m:Input id="folio2" value="{SiteInfo>/Folio2}" editable="false"/>
+                                <m:Label id="_IDLabel30" text="{i18n>timeZone}"/>
+                                <m:Input id="timeZone" value="{SiteInfo>/TimeZone}" editable="false"/>
+                                <m:Label id="_IDLabel31" text="{i18n>openHour}"/>
+                                <m:Input id="openHour" value="{SiteInfo>/OpenHour}" editable="false"/>
+                                <m:Label id="_IDLabel32" text="{i18n>closeHour}"/>
+                                <m:Input id="closeHour" value="{SiteInfo>/CloseHour}" editable="false"/>
+                                <m:Label id="_IDLabel33" text="{i18n>status}"/>
                                 <m:ComboBox
                                     id="siteStatusComboBox"
                                     valueState="{/siteStatusState}"
@@ -140,25 +158,25 @@
                                     items="{ path: '/SiteStatusCollection' }"
                                     placeholder="{i18n>siteStatusPlaceHolder}"
                                     editable="false">
-                                    <core:ListItem id="_IDGenListItemSiteStatus" key="{ID}" text="{name}"/>
+                                    <core:ListItem id="_IDListItemSiteStatus" key="{ID}" text="{Name}"/>
                                 </m:ComboBox>
-                                <m:Label id="_IDGenLabel29" text="{i18n>contractedDemand}"/>
-                                <m:Input id="contractedDemand" value="{SiteInfo>/contractedDemand}" editable="false"/>
-                                <m:Label id="_IDGenLabel30" text="{i18n>cutoffDate}"/>
-                                <m:Input id="cutoffDate" value="{SiteInfo>/cutoffDate}" placeholder="{i18n>cutoffDatePlaceHolder}" editable="false"/>
-                                <m:Label id="_IDGenLabel31" text="{i18n>multiplier}"/>
-                                <m:Input id="multiplier" value="{SiteInfo>/multiplier}" editable="false"/>
-                                <m:Label id="_IDGenLabel32" text="{i18n>manager}"/>
-                                <m:Input id="manager" value="{SiteInfo>/manager}" editable="false"/>
-                                <m:Label id="_IDGenLabel1" text="{i18n>constructedAreaLabel}"/>
-                                <m:Input id="constructedArea" value="{SiteInfo>/constructedArea}" editable="false"/>
+                                <m:Label id="_IDLabel34" text="{i18n>contractedDemand}"/>
+                                <m:Input id="contractedDemand" value="{SiteInfo>/ContractedDemand}" editable="false"/>
+                                <m:Label id="_IDLabel35" text="{i18n>cutoffDate}"/>
+                                <m:Input id="cutoffDate" value="{SiteInfo>/CutoffDate}" placeholder="{i18n>cutoffDatePlaceHolder}" editable="false"/>
+                                <m:Label id="_IDLabel36" text="{i18n>multiplier}"/>
+                                <m:Input id="multiplier" value="{SiteInfo>/Multiplier}" editable="false"/>
+                                <m:Label id="_IDLabel37" text="{i18n>manager}"/>
+                                <m:Input id="manager" value="{SiteInfo>/Manager}" editable="false"/>
+                                <m:Label id="_IDLabel38" text="{i18n>constructedAreaLabel}"/>
+                                <m:Input id="constructedArea" value="{SiteInfo>/ConstructedArea}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
             </ObjectPageSection>
 
-             <ObjectPageSection titleUppercase="false" id="addressSection" title="{i18n>AddressStep}">
+            <ObjectPageSection titleUppercase="false" id="addressSection" title="{i18n>AddressStep}">
                 <subSections>
                     <ObjectPageSubSection id="_IDGenObjectPageSubSection3">
                         <form:SimpleForm id="_IDGenSimpleForm03"
@@ -173,33 +191,33 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabel2" text="{i18n>countryLabel}"/>
-                                <m:Input id="country" value="{SiteInfo>/address/country}" editable="false"/>
-                                <m:Label id="_IDGenLabel3" text="{i18n>stateLabel}"/>
-                                <m:Input id="state" value="{SiteInfo>/address/state}" editable="false"/>
-                                <m:Label id="_IDGenLabel4" text="{i18n>townLabel}"/>
-                                <m:Input id="town" value="{SiteInfo>/address/town}" editable="false"/>
-                                <m:Label id="_IDGenLabel5" text="{i18n>postalCodeLabel}"/>
-                                <m:Input id="postalCode" value="{SiteInfo>/address/postalCode}" editable="false"/>
-                                <m:Label id="_IDGenLabel6" text="{i18n>neighborhoodLabel}"/>
-                                <m:Input id="neighborhood" value="{SiteInfo>/address/neighborhood}" editable="false"/>
-                                <m:Label id="_IDGenLabel7" text="{i18n>streetLabel}"/>
-                                <m:Input id="street" value="{SiteInfo>/address/street}" editable="false"/>
-                                <m:Label id="_IDGenLabel8" text="{i18n>numberLabel}"/>
-                                <m:Input id="extNumber" value="{SiteInfo>/address/extNumber}" editable="false"/>
-                                <m:Label id="_IDGenLabel9" text="{i18n>intNumberLabel}"/>
-                                <m:Input id="intNumber" value="{SiteInfo>/address/intNumber}" editable="false"/>
-                                <m:Label id="_IDGenLabel10" text="{i18n>latitudeLabel}"/>
-                                <m:Input id="latitude" value="{SiteInfo>/address/latitude}" editable="false"/>
-                                <m:Label id="_IDGenLabel11" text="{i18n>longitudeLabel}"/>
-                                <m:Input id="longitude" value="{SiteInfo>/address/longitude}" editable="false"/>
+                                <m:Label id="_IDLabel41" text="{i18n>countryLabel}"/>
+                                <m:Input id="country" value="{SiteInfo>/Address/Country}" editable="false"/>
+                                <m:Label id="_IDLabel42" text="{i18n>stateLabel}"/>
+                                <m:Input id="state" value="{SiteInfo>/Address/State}" editable="false"/>
+                                <m:Label id="_IDLabel43" text="{i18n>townLabel}"/>
+                                <m:Input id="town" value="{SiteInfo>/Address/Town}" editable="false"/>
+                                <m:Label id="_IDLabel44" text="{i18n>postalCodeLabel}"/>
+                                <m:Input id="postalCode" value="{SiteInfo>/Address/PostalCode}" editable="false"/>
+                                <m:Label id="_IDLabel45" text="{i18n>neighborhoodLabel}"/>
+                                <m:Input id="neighborhood" value="{SiteInfo>/Address/Neighborhood}" editable="false"/>
+                                <m:Label id="_IDLabel46" text="{i18n>streetLabel}"/>
+                                <m:Input id="street" value="{SiteInfo>/Address/street}" editable="false"/>
+                                <m:Label id="_IDLabel47" text="{i18n>numberLabel}"/>
+                                <m:Input id="extNumber" value="{SiteInfo>/Address/ExtNumber}" editable="false"/>
+                                <m:Label id="_IDLabel48" text="{i18n>intNumberLabel}"/>
+                                <m:Input id="intNumber" value="{SiteInfo>/Address/IntNumber}" editable="false"/>
+                                <m:Label id="_IDLabel49" text="{i18n>latitudeLabel}"/>
+                                <m:Input id="latitude" value="{SiteInfo>/Address/Latitude}" editable="false"/>
+                                <m:Label id="_IDLabel50" text="{i18n>longitudeLabel}"/>
+                                <m:Input id="longitude" value="{SiteInfo>/Address/Longitude}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection titleUppercase="false" id="supplierSection" title="{i18n>suppliersStep}">
+            <ObjectPageSection titleUppercase="false" id="addressCFESection" title="{i18n>AddressCFEStep}">
                 <subSections>
                     <ObjectPageSubSection id="_IDGenObjectPageSubSection4">
                         <form:SimpleForm id="_IDGenSimpleForm04"
@@ -214,19 +232,29 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabel42" text="{i18n>electricSupplierLabel}"/>
-                                <m:MultiInput id="electricSupplier" value="{SiteInfo>/electricSupplier}" editable="false"/>
-                                <m:Label id="_IDGenLabel43" text="{i18n>gasSupplierLabel}"/>
-                                <m:MultiInput id="gasSupplier" value="{SiteInfo>/gasSupplier}" editable="false"/>
-                                <m:Label id="_IDGenLabel44" text="{i18n>waterSupplierLabel}"/>
-                                <m:MultiInput id="waterSupplier" value="{SiteInfo>/waterSupplier}" editable="false"/>
+                                <m:Label id="_IDLabel61" text="{i18n>countryLabel}"/>
+                                <m:Input id="countryCFE" value="{SiteInfo>/AddressCFE/Country}" editable="false"/>
+                                <m:Label id="_IDLabel62" text="{i18n>stateLabel}"/>
+                                <m:Input id="stateCFE" value="{SiteInfo>/AddressCFE/State}" editable="false"/>
+                                <m:Label id="_IDLabel63" text="{i18n>townLabel}"/>
+                                <m:Input id="townCFE" value="{SiteInfo>/AddressCFE/Town}" editable="false"/>
+                                <m:Label id="_IDLabel64" text="{i18n>postalCodeLabel}"/>
+                                <m:Input id="postalCodeCFE" value="{SiteInfo>/AddressCFE/PostalCode}" editable="false"/>
+                                <m:Label id="_IDLabel65" text="{i18n>neighborhoodLabel}"/>
+                                <m:Input id="neighborhoodCFE" value="{SiteInfo>/AddressCFE/Neighborhood}" editable="false"/>
+                                <m:Label id="_IDLabel66" text="{i18n>streetLabel}"/>
+                                <m:Input id="streetCFE" value="{SiteInfo>/AddressCFE/Street}" editable="false"/>
+                                <m:Label id="_IDLabel67" text="{i18n>numberLabel}"/>
+                                <m:Input id="extNumberCFE" value="{SiteInfo>/AddressCFE/ExtNumber}" editable="false"/>
+                                <m:Label id="_IDLabel68" text="{i18n>intNumberLabel}"/>
+                                <m:Input id="intNumberCFE" value="{SiteInfo>/AddressCFE/IntNumber}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection titleUppercase="false" id="gatewaySection" title="{i18n>gatewaySIMStep}">
+            <ObjectPageSection titleUppercase="false" id="supplierSection" title="{i18n>suppliersStep}">
                 <subSections>
                     <ObjectPageSubSection id="_IDGenObjectPageSubSection5">
                         <form:SimpleForm id="_IDGenSimpleForm05"
@@ -241,23 +269,19 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabel52" text="{i18n>gatewayName}"/>
-                                <m:Input id="gatewayName" value="{SiteInfo>/gateway/0/name}" editable="false"/>
-                                <m:Label id="_IDGenLabel53" text="{i18n>gatewaySN}"/>
-                                <m:Input id="gatewaySN" value="{SiteInfo>/gateway/0/serialNumber}" editable="false"/>
-                                <m:Label id="_IDGenLabel54" text="{i18n>gatewayPIN}"/>
-                                <m:Input id="gatewayPIN" value="{SiteInfo>/gateway/0/pin}" editable="false"/>
-                                <m:Label id="_IDGenLabel55" text="{i18n>simIMSI}"/>
-                                <m:Input id="simIMSI" value="{SiteInfo>/sim/0/IMSI}" editable="false"/>
-                                <m:Label id="_IDGenLabel56" text="{i18n>simMSASDN}"/>
-                                <m:Input id="simMSASDN" value="{SiteInfo>/sim/0/MSASDN}" editable="false"/>
+                                <m:Label id="_IDLabel69" text="{i18n>electricSupplierLabel}"/>
+                                <m:MultiInput id="electricSupplier" value="{SiteInfo>/ElectricSupplier}" editable="false"/>
+                                <m:Label id="_IDLabel70" text="{i18n>gasSupplierLabel}"/>
+                                <m:MultiInput id="gasSupplier" value="{SiteInfo>/GasSupplier}" editable="false"/>
+                                <m:Label id="_IDLabel71" text="{i18n>waterSupplierLabel}"/>
+                                <m:MultiInput id="waterSupplier" value="{SiteInfo>/WaterSupplier}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection titleUppercase="false" id="contactSection" title="{i18n>contactStep}">
+            <ObjectPageSection titleUppercase="false" id="gatewaySection" title="{i18n>gatewaySIMStep}">
                 <subSections>
                     <ObjectPageSubSection id="_IDGenObjectPageSubSection6">
                         <form:SimpleForm id="_IDGenSimpleForm06"
@@ -272,19 +296,23 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabel62" text="{i18n>contactName}"/>
-                                <m:Input id="contact" value="{SiteInfo>/contact}" editable="false"/>
-                                <m:Label id="_IDGenLabel63" text="{i18n>contactPhone}"/>
-                                <m:Input id="contactPhone" value="{SiteInfo>/contactPhone}" editable="false"/>
-                                <m:Label id="_IDGenLabel64" text="{i18n>contactEmail}"/>
-                                <m:Input id="contactEmail" value="{SiteInfo>/contactEmail}" editable="false"/>
+                                <m:Label id="_IDLabel72" text="{i18n>gatewayName}"/>
+                                <m:Input id="gatewayName" value="{SiteInfo>/Gateway/0/Name}" editable="false"/>
+                                <m:Label id="_IDLabel73" text="{i18n>gatewaySN}"/>
+                                <m:Input id="gatewaySN" value="{SiteInfo>/Gateway/0/SerialNumber}" editable="false"/>
+                                <m:Label id="_IDLabel74" text="{i18n>gatewayPIN}"/>
+                                <m:Input id="gatewayPIN" value="{SiteInfo>/Gateway/0/Pin}" editable="false"/>
+                                <m:Label id="_IDLabel75" text="{i18n>simIMSI}"/>
+                                <m:Input id="simIMSI" value="{SiteInfo>/Sim/0/IMSI}" editable="false"/>
+                                <m:Label id="_IDLabel76" text="{i18n>simMSASDN}"/>
+                                <m:Input id="simMSASDN" value="{SiteInfo>/Sim/0/MSASDN}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
             </ObjectPageSection>
 
-            <!-- <ObjectPageSection titleUppercase="false" id="zoneSection" title="{i18n>associatedZones}">
+            <ObjectPageSection titleUppercase="false" id="contactSection" title="{i18n>contactStep}">
                 <subSections>
                     <ObjectPageSubSection id="_IDGenObjectPageSubSection7">
                         <form:SimpleForm id="_IDGenSimpleForm07"
@@ -299,15 +327,18 @@
                             columnsL="1"
                             columnsM="1">
                             <form:content>
-                                <m:Label id="_IDGenLabel72" text="{i18n>zoneName}"/>
-                                <m:Text id="_IDGenText72" text="{SiteInfo>/zone/name}"/>
-                                <m:Label id="_IDGenLabel73" text="{i18n>zoneID}"/>
-                                <m:Text id="_IDGenText73" text="{SiteInfo>/zone/ID}"/>
+                                <m:Label id="_IDLabel77" text="{i18n>contactName}"/>
+                                <m:Input id="contact" value="{SiteInfo>/Contact}" editable="false"/>
+                                <m:Label id="_IDLabel78" text="{i18n>contactPhone}"/>
+                                <m:Input id="contactPhone" value="{SiteInfo>/ContactPhone}" editable="false"/>
+                                <m:Label id="_IDLabel79" text="{i18n>contactEmail}"/>
+                                <m:Input id="contactEmail" value="{SiteInfo>/ContactEmail}" editable="false"/>
                             </form:content>						
                             </form:SimpleForm>
                     </ObjectPageSubSection>			
                 </subSections>
-            </ObjectPageSection> -->
+            </ObjectPageSection>
+
         </sections>
         
     </ObjectPageLayout>

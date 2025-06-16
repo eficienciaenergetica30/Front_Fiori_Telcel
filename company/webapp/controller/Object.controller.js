@@ -231,7 +231,7 @@ sap.ui.define([
                     async: false,
                     success: function (data, textStatus, jqXHR) {
                         console.log(data);
-                        let messageText = "La compañía " + data.friendlyName + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
+                        let messageText = "La compañía " + data.FriendlyName + " con ID " + data.ID + ((deleteValue) ? " se ha eliminado correctamente" : " se ha restaurado correctamente");
                         MessageBox.success(messageText, {
                             actions: [MessageBox.Action.OK],
                             emphasizedAction: MessageBox.Action.OK,
@@ -451,7 +451,7 @@ sap.ui.define([
                         async: false, 
                         success : function(data, textStatus, jqXHR) {
                             console.log(data);
-                            let messageText = "La compañía " + data.friendlyName + " con ID " + data.ID + " se ha modificado correctamente";
+                            let messageText = "La compañía " + data.FriendlyName + " con ID " + data.ID + " se ha modificado correctamente";
                             MessageBox.success(messageText, {
                                 actions: [MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,

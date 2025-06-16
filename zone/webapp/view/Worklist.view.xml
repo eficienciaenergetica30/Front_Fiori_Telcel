@@ -49,7 +49,7 @@
                     placeholder="{i18n>searchSitePlaceHolder}"
                     change=".onSearchSiteCombo"
                     selectionChange=".onSelectionChange">
-                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{name}" additionalText="{costCenter}"/>
+                    <core:ListItem id="_IDGenListItemComp" key="{ID}" text="{Name}" additionalText="{CostCenter}"/>
                 </ComboBox>
                 <SearchField
                     id="searchCostCenter"
@@ -75,7 +75,7 @@
                 items="{
                     path: 'Zones>/',
                     sorter: {
-                        path: 'site/name,name',
+                        path: 'Site/Name,Name',
                         descending: false
                     }
                 }"
@@ -107,19 +107,19 @@
                         press=".onPress">
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier1"
-                                title="{Zones>name}"/>
+                                title="{Zones>Name}"/>
                         </cells>
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier2"
-                                title="{Zones>site/name}"/>
+                                title="{Zones>Site/Name}"/>
                         </cells>
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier3"
-                                title="{Zones>site/costCenter}"/>
+                                title="{Zones>Site/CostCenter}"/>
                         </cells>
                         <cells>
                             <ObjectIdentifier id="_IDGenObjectIdentifier4"
-                                title="{Zones>site/businessUnit}"/>
+                                title="{Zones>Site/BusinessUnit}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
