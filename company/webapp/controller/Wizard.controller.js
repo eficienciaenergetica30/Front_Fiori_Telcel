@@ -321,7 +321,7 @@ sap.ui.define([
             return new Promise(function (fnResolve, fnReject) {
                 that.getDataWizard().then(function (res) {
                     let postData = res;
-                    postData.deletionRequest = 0;
+                    postData.DeletionRequest = 0;
                     let aData = jQuery.ajax({
                         type: "POST",
                         contentType: "application/json",

@@ -207,16 +207,16 @@ sap.ui.define([
                 deletionRequestSensor = {};
 
             if (deleteValue) {
-                deletionRequestCompany.deletionRequest = 1;
-                deletionRequestSite.deletionRequest = 2;
-                deletionRequestZone.deletionRequest = 2;
-                deletionRequestSensor.deletionRequest = 2;
+                deletionRequestCompany.DeletionRequest = 1;
+                deletionRequestSite.DeletionRequest = 2;
+                deletionRequestZone.DeletionRequest = 2;
+                deletionRequestSensor.DeletionRequest = 2;
             }
             else {
-                deletionRequestCompany.deletionRequest = 0;
-                deletionRequestSite.deletionRequest = 0;
-                deletionRequestZone.deletionRequest = 0;
-                deletionRequestSensor.deletionRequest = 0;
+                deletionRequestCompany.DeletionRequest = 0;
+                deletionRequestSite.DeletionRequest = 0;
+                deletionRequestZone.DeletionRequest = 0;
+                deletionRequestSensor.DeletionRequest = 0;
             }
 
             sap.ui.core.BusyIndicator.show();
@@ -256,7 +256,7 @@ sap.ui.define([
 
             that.getSiteCompany(companyID).then(function (res) {
                 res.forEach(element => {
-                    if (element.deletionRequest == 0 || element.deletionRequest == 2) {
+                    if (element.DeletionRequest == 0 || element.DeletionRequest == 2) {
                         promiseArray.push(new Promise(function (fnResolve, fnReject) {
                             let aData = jQuery.ajax({
                                 type: "PATCH",
@@ -277,7 +277,7 @@ sap.ui.define([
 
                         that.getZoneSite(element.ID).then(function (res) {
                             res.forEach(element => {
-                                if (element.deletionRequest == 0 || element.deletionRequest == 2) {
+                                if (element.DeletionRequest == 0 || element.DeletionRequest == 2) {
                                     promiseArray.push(new Promise(function (fnResolve, fnReject) {
                                         let aData = jQuery.ajax({
                                             type: "PATCH",
@@ -298,7 +298,7 @@ sap.ui.define([
 
                                     that.getSensorZone(element.ID).then(function (res) {
                                         res.forEach(element => {
-                                            if (element.deletionRequest == 0 || element.deletionRequest == 2) {
+                                            if (element.DeletionRequest == 0 || element.DeletionRequest == 2) {
                                                 promiseArray.push(new Promise(function (fnResolve, fnReject) {
                                                     let aData = jQuery.ajax({
                                                         type: "PATCH",

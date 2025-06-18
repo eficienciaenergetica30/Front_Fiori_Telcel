@@ -200,7 +200,7 @@ sap.ui.define([
             var aTableSearchState = [];
             var sQuery = 0;
             
-            aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, sQuery)];
+            aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, sQuery)];
             
             this._applySearch(aTableSearchState);
         },
@@ -218,9 +218,9 @@ sap.ui.define([
 
                 if (sQuery && sQuery.length > 0) {
                     if (this.byId("deleteRecords").mProperties.state) {
-                        aTableSearchState = [new Filter("friendlyName", FilterOperator.Contains, sQuery), new Filter("deletionRequest", FilterOperator.EQ, 1)];
+                        aTableSearchState = [new Filter("friendlyName", FilterOperator.Contains, sQuery), new Filter("DeletionRequest", FilterOperator.EQ, 1)];
                     }
-                    else aTableSearchState = [new Filter("friendlyName", FilterOperator.Contains, sQuery), new Filter("deletionRequest", FilterOperator.EQ, 0)];
+                    else aTableSearchState = [new Filter("friendlyName", FilterOperator.Contains, sQuery), new Filter("DeletionRequest", FilterOperator.EQ, 0)];
                 }
                 this._applySearch(aTableSearchState);
             }
@@ -259,9 +259,9 @@ sap.ui.define([
         handleChangeSwitch: function() {
             var aTableSearchState = [];
             if (this.byId("deleteRecords").mProperties.state) {
-                aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, 1)];
+                aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, 1)];
             }
-            else aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, 0)];
+            else aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, 0)];
             
             this._applySearch(aTableSearchState);
         },
