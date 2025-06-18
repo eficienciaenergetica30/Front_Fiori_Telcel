@@ -68,7 +68,7 @@
                                         <m:Input id="businessName" required="true" value="{CompanyInfo>/BusinessName}" editable="false" placeholder="{i18n>businessNamePlaceHolder}"/>
                                         <m:Label id="_IDGenLabel2" text="{i18n>friendlyNameLabel}"/>
                                         <m:Input id="friendlyName" required="true" value="{CompanyInfo>/FriendlyName}" editable="false" placeholder="{i18n>friendlyNamePlaceHolder}"/>
-                                        <m:Label id="_IDGenLabel3" text="{CompanyInfo>/deletionRequest}" visible="false"/>
+                                        <m:Label id="_IDGenLabel3" text="{CompanyInfo>/DeletionRequest}" visible="false"/>
                                         <core:InvisibleText id="companyDeletionRequestInvisible" text="{CompanyInfo>/DeletionRequest}"/>
                                         <m:Label id="_IDGenLabel4" text="{CompanyInfo>/AddressID}" visible="false"/>
                                         <core:InvisibleText id="addressIDInvisible" text="{CompanyInfo>/AddressID}"/>

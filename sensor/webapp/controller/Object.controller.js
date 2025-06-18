@@ -351,10 +351,10 @@ sap.ui.define([
                 deletionRequestSensor = {};
 
             if (deleteValue) {
-                deletionRequestSensor.deletionRequest = 1;
+                deletionRequestSensor.DeletionRequest = 1;
             }
             else {
-                deletionRequestSensor.deletionRequest = 0;
+                deletionRequestSensor.DeletionRequest = 0;
             }
 
             return new Promise(function (fnResolve, fnReject) {

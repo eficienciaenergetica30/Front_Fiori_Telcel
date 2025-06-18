@@ -285,7 +285,7 @@ sap.ui.define([
                 // refresh the list binding.
                 this.onRefresh();
             } else {
-                var aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
+                var aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
                 var sQuery = oEvent.getParameter("query");
 
                 if (sQuery && sQuery.length > 0) {
@@ -301,7 +301,7 @@ sap.ui.define([
             if (oEvent.getParameters().refreshButtonPressed) {
                 this.onRefresh();
             } else {
-                var aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
+                var aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
                 var sQuery = oEvent.getParameter("query");
 
                 if (sQuery && sQuery.length > 0) {
@@ -327,7 +327,7 @@ sap.ui.define([
             if (oEvent.getParameters().refreshButtonPressed) {
                 this.onRefresh();
             } else {
-                var aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
+                var aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
                 var sQuery = oEvent.getParameter("query");
 
                 if (sQuery && sQuery.length > 0) {
@@ -350,7 +350,7 @@ sap.ui.define([
         },
 
         searchSiteComboBox : function (value) {
-            var aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
+            var aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, this.byId("deleteRecords").mProperties.state ? 1 : 0)];
 
             if (value && value.length > 0) {
                 aTableSearchState.unshift(new Filter("site/ID", FilterOperator.EQ, value));
@@ -391,7 +391,7 @@ sap.ui.define([
             var aTableSearchState = [];
             var sQuery = 0;
             
-            aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, sQuery)];
+            aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, sQuery)];
             
             this._applySearch(aTableSearchState);
         },
@@ -399,9 +399,9 @@ sap.ui.define([
         handleChangeSwitch: function() {
             var aTableSearchState = [];
             if (this.byId("deleteRecords").mProperties.state) {
-                aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, 1)];
+                aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, 1)];
             }
-            else aTableSearchState = [new Filter("deletionRequest", FilterOperator.EQ, 0)];
+            else aTableSearchState = [new Filter("DeletionRequest", FilterOperator.EQ, 0)];
             
             this._applySearch(aTableSearchState);
         },

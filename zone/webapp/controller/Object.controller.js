@@ -172,12 +172,12 @@ sap.ui.define([
                 deletionRequestSensor = {};
 
             if (deleteValue) {
-                deletionRequestZone.deletionRequest = 1;
-                deletionRequestSensor.deletionRequest = 2;
+                deletionRequestZone.DeletionRequest = 1;
+                deletionRequestSensor.DeletionRequest = 2;
             }
             else {
-                deletionRequestZone.deletionRequest = 0;
-                deletionRequestSensor.deletionRequest = 0;
+                deletionRequestZone.DeletionRequest = 0;
+                deletionRequestSensor.DeletionRequest = 0;
             }
 
             promiseArray.push(new Promise(function (fnResolve, fnReject) {
@@ -215,7 +215,7 @@ sap.ui.define([
 
             that.getSensorZone(zoneID).then(function(res) {
                 res.forEach(element => {
-                    if (element.deletionRequest == 0 || element.deletionRequest == 2) {
+                    if (element.DeletionRequest == 0 || element.DeletionRequest == 2) {
                         promiseArray.push(new Promise(function(fnResolve, fnReject) {
                             let aData = jQuery.ajax({
                                 type : "PATCH",
