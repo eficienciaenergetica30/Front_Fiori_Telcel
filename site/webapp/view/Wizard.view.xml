@@ -49,6 +49,15 @@ xmlns="sap.m">
                     placeholder="{i18n>siteNamePlaceHolder}"
                     liveChange="stepTwoValidation">
 		        </Input>
+                <Label id="externalIdLabel" text="{i18n>externalId}"/>
+                <Input
+                    id="externalIdInput"
+                    required="true"
+                    valueState="{/externalIdState}"
+                    valueStateText="{i18n>externalIdStateText}"
+                    placeholder="{i18n>externalIdPlaceHolder}"
+                    liveChange="stepTwoValidation">
+		        </Input>
                 <Label id="siteTypeLabel" text="{i18n>siteType}"/>
                 <ComboBox
                 	showSecondaryValues= "true"
@@ -86,15 +95,6 @@ xmlns="sap.m">
                     valueState="{/companyDivisionState}"
                     valueStateText="{i18n>companyDivisionStateText}"
                     placeholder="{i18n>companyDivisionPlaceHolder}"
-                    liveChange="stepTwoValidation">
-		        </Input>
-                <Label id="corporationLabel" text="{i18n>corporation}"/>
-                <Input
-                    id="corporationInput"
-                    required="true"
-                    valueState="{/corporationState}"
-                    valueStateText="{i18n>corporationStateText}"
-                    placeholder="{i18n>corporationPlaceHolder}"
                     liveChange="stepTwoValidation">
 		        </Input>
                 <Label id="siteBusinessUnitLabel" text="{i18n>siteBusinessUnit}"/>
@@ -147,90 +147,40 @@ xmlns="sap.m">
                     placeholder="{i18n>siteFarePlaceHolder}">
                 </Input>
                 <Label id="siteRegionLabel" text="{i18n>region}"/>
-                <ComboBox
-                	id="siteRegionComboBox"
+                <Input
+                    id="siteRegionInput"
                     required="true"
+                    type="Text"
                     valueState="{/siteRegionState}"
                     valueStateText="{i18n>siteRegionStateText}"
-                    items="{ path: '/SiteRegionCollection',
-                            sorter: {
-                                path: 'Region',
-                                descending: false
-                            } }"
                     placeholder="{i18n>siteRegionPlaceHolder}"
-                    change="stepTwoValidation">
-                    <core:ListItem id="_IDGenListItemSiteRegion" key="{ID}" text="{Region}"/>
-                </ComboBox>
-                <Label id="externalIdLabel" text="{i18n>externalId}"/>
-                <ComboBox
-                	id="externalIdComboBox"
-                    required="true"
-                    valueState="{/externalIdState}"
-                    valueStateText="{i18n>externalIdStateText}"
-                    items="{ path: '/externalIdCollection',
-                            sorter: {
-                                path: 'Region',
-                                descending: false
-                            } }"
-                    placeholder="{i18n>externalIdPlaceHolder}"
-                    change="stepTwoValidation">
-                    <core:ListItem id="_IDGenListItemExternalId" key="{ID}" text="{Region}"/>
-                </ComboBox>
+                    liveChange="stepTwoValidation">
+                </Input>
                 <Label id="siteCostCenterLabel" text="{i18n>siteCostCenter}"/>
                 <Input
                     id="siteCostCenterInput"
-                    required="true"
-                    type="Number"
-                    valueState="{/siteCostCenterState}"
-                    valueStateText="{i18n>siteCostCenterStateText}"
-                    placeholder="{i18n>siteCostCenterPlaceHolder}"
-                    liveChange="stepTwoValidation">
-		        </Input>
-                <Label id="siteCostCenterEgLabel" text="{i18n>siteCostCenterEg}"/>
-                <Input
-                    id="siteCostCenterEgInput"
-                    required="true"
-                    type="Number"
-                    valueState="{/siteCostCenterEgState}"
-                    valueStateText="{i18n>siteCostCenterEgStateText}"
-                    placeholder="{i18n>siteCostCenterEgPlaceHolder}"
-                    liveChange="stepTwoValidation">
+                    type="Text"
+                    placeholder="{i18n>siteCostCenterPlaceHolder}">
 		        </Input>
                 <Label id="sapAccountLabel" text="{i18n>sapAccount}"/>
                 <Input
                     id="sapAccountInput"
-                    required="true"
-                    valueState="{/sapAccountState}"
-                    valueStateText="{i18n>sapAccountStateText}"
-                    placeholder="{i18n>sapAccountPlaceHolder}"
-                    liveChange="stepTwoValidation">
+                    placeholder="{i18n>sapAccountPlaceHolder}">
 		        </Input>
                 <Label id="supplierLabel" text="{i18n>supplier}"/>
                 <Input
                     id="supplierInput"
-                    required="true"
-                    valueState="{/supplierState}"
-                    valueStateText="{i18n>supplierStateText}"
-                    placeholder="{i18n>supplierPlaceHolder}"
-                    liveChange="stepTwoValidation">
+                    placeholder="{i18n>supplierPlaceHolder}">
 		        </Input>
                 <Label id="folio1Label" text="{i18n>folio1}"/>
                 <Input
                     id="folio1Input"
-                    required="true"
-                    valueState="{/folio1State}"
-                    valueStateText="{i18n>folio1StateText}"
-                    placeholder="{i18n>folio1PlaceHolder}"
-                    liveChange="stepTwoValidation">
+                    placeholder="{i18n>folio1PlaceHolder}">
 		        </Input>
                 <Label id="folio2Label" text="{i18n>folio2}"/>
                 <Input
                     id="folio2Input"
-                    required="true"
-                    valueState="{/folio2State}"
-                    valueStateText="{i18n>folio2StateText}"
-                    placeholder="{i18n>folio2PlaceHolder}"
-                    liveChange="stepTwoValidation">
+                    placeholder="{i18n>folio2PlaceHolder}">
 		        </Input>
                 <Label id="timeZoneLabel" text="{i18n>timeZone}"/>
                 <ComboBox
@@ -297,38 +247,13 @@ xmlns="sap.m">
                 <Label id="siteContractedDemandLabel" text="{i18n>contractedDemand}"/>
                 <Input
                     id="siteContractedDemandInput"
-                    required="false"
+                    required="true"
                     type="Number"
                     valueState="{/siteContractedDemandState}"
                     valueStateText="{i18n>siteContractedDemandStateText}"
                     placeholder="{i18n>siteContractedDemandPlaceHolder}"
                     liveChange="stepTwoValidation">
                 </Input>
-                <Label id="siteCutoffDateLabel" text="{i18n>cutoffDate}"/>
-                <Input
-                    id="siteCutoffDateInput"
-                    required="false"
-                    type="Text"
-                    placeholder="{i18n>siteCutoffDatePlaceHolder}">
-                </Input>
-                <Label id="siteMultiplierLabel" text="{i18n>multiplier}"/>
-                <Input
-                    id="siteMultiplierInput"
-                    type="Text"
-                    placeholder="{i18n>siteMultiplierPlaceHolder}">
-                </Input>
-                <Label id="siteManagerLabel" text="{i18n>manager}"/>
-                <ComboBox
-                	id="siteManagerComboBox"
-                    required="true"
-                    valueState="{/siteManagerState}"
-                    valueStateText="{i18n>siteManagerStateText}"
-                    items="{ path: '/SiteManagerCollection',
-                            sorter: { path: 'Name' } }"
-                    placeholder="{i18n>siteManagerPlaceHolder}"
-                    change="stepTwoValidation">
-                    <core:ListItem id="_IDGenListItemSiteManager" key="{ID}" text="{Name}"/>
-                </ComboBox>
                 <Label id="_IDGenLabelconstructedArea" text="{i18n>constructedAreaLabel}"/>
                 <Input id="constructedAreaInput" type="Number" placeholder="{i18n>constructedAreaPlaceHolder}"/>
                 </form:SimpleForm>
@@ -419,90 +344,8 @@ xmlns="sap.m">
                 <Input id="latitudeInput" type="Number" placeholder="{i18n>latitudePlaceHolder}"/>
                 <Label id="_IDGenLabel8" text="{i18n>longitudeLabel}"/>
                 <Input id="longitudeInput" type="Number" placeholder="{i18n>longitudePlaceHolder}"/>
-                </form:SimpleForm>
-            </WizardStep>
-            <WizardStep 
-                id="AddressCFEStep" 
-                title="{i18n>AddressCFEStep}"
-                validated="false"
-                activate="stepCFEAddressValidation">
-                <MessageStrip 
-                    id="_IDGenMessageStrip12"
-                    class="sapUiSmallMarginBottom" 
-                    text="{i18n>addressCFESiteMessage}" 
-                    showIcon="true"/>
-                <form:SimpleForm id="_IDGenSimpleForm2" editable="true">
-                <Label id="_IDGenLabelCFE" text="{i18n>countryLabel}" required="true"/>
-                <ComboBox
-                	showSecondaryValues= "true"
-                    id="countryComboBoxCFE"
-                    required="true"
-                    valueState="{/countryStateCFE}"
-                    items="{ path: '/CountryCollection' }"
-                    placeholder="{i18n>countryPlaceHolder}"
-                    change="stepCFEAddressValidation">
-                    <core:ListItem id="_IDGenListItem1CFE" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
-                </ComboBox>
-                <Label id="_IDGenLabelStateCFE" text="{i18n>stateLabel}" required="true"/>
-                <ComboBox
-                    showSecondaryValues= "true"
-                    id="stateComboBoxCFE" 
-                    required="true"
-                    valueState="{/stateStateCFE}"
-                    items="{ path: '/StateCollection' }"
-                    placeholder="{i18n>statePlaceHolder}" 
-                    change="stepCFEAddressValidation">
-                    <core:ListItem id="_IDGenListItem2CFE" key="{ID}" text="{Name}"  additionalText = "{Alpha2Code}" />
-                </ComboBox>
-                <Label id="_IDGenLabelMuniCFE" text="{i18n>townLabel}" required="true"/>
-                <ComboBox
-                    showSecondaryValues= "true" 
-                    id="townComboBoxCFE" 
-                    required="true"
-                    valueState="{/townStateCFE}"
-                    items="{ path: '/TownCollection' }"
-                    placeholder="{i18n>townPlaceHolder}" 
-                    change="stepCFEAddressValidation">
-                   <core:ListItem id="_IDGenListItem3CFE" key="{ID}" text="{Town}"  additionalText = "{StateCode}" />
-                </ComboBox>
-                <Label id="_IDGenLabelPostalCFE" text="{i18n>postalCodeLabel}" required="true"/>
-                <ComboBox 
-                    id="postalCodeComboBoxCFE"
-                    required="true"
-                    valueState="{/postalCodeStateCFE}"
-                    items="{ path: '/PostalCodeCollection' }"
-                    placeholder="{i18n>postalCodePlaceHolder}"
-                    change="stepCFEAddressValidation">
-                    <core:ListItem id="_IDGenListItem4CFE" key="{ID}" text="{Code}" />
-                </ComboBox>
-                <Label id="_IDGenLabel3CFE" text="{i18n>neighborhoodLabel}"/>
-                <ComboBox 
-                    id="neighborhoodComboBoxCFE"
-                    required="true"
-                    valueState="{/neighborhoodStateCFE}"
-                    items="{ path: '/NeighborhoodCollection' }"
-                    placeholder="{i18n>neighborhooddPlaceHolder}"
-                    change="stepCFEAddressValidation">
-                    <core:ListItem id="_IDGenListItem5CFE" key="{ID}" text="{Neighborhood}" />
-                </ComboBox>
-                <Label id="_IDGenLabel4CFE" text="{i18n>streetLabel}"/>
-                <Input 
-                    id="streetInputCFE"
-                    required="true"
-                    valueState="{/streetStateCFE}"
-                    valueStateText="{i18n>streetStateText}"
-                    placeholder="{i18n>streetPlaceHolder}"
-                    liveChange="stepCFEAddressValidation"/>
-                <Label id="_IDGenLabel5CFE" text="{i18n>numberLabel}"/>
-                <Input 
-                    id="numberInputCFE"
-                    required="true"
-                    valueState="{/extNumberStateCFE}"
-                    valueStateText="{i18n>extNumberStateText}"
-                    placeholder="{i18n>numberPlaceHolder}"
-                    liveChange="stepCFEAddressValidation"/>
-                <Label id="_IDGenLabel6CFE" text="{i18n>intNumberLabel}"/>
-                <Input id="intNumberInputCFE" placeholder="{i18n>intNumberPlaceHolder}"/>
+                <Label id="_IDGenLabelAddressCFE" text="{i18n>addressCFELabel}"/>
+                <Input id="addressCFEInput" type="Text" placeholder="{i18n>addressCFEPlaceHolder}"/>
                 </form:SimpleForm>
             </WizardStep>
             <WizardStep 
@@ -674,6 +517,8 @@ xmlns="sap.m">
             <form:content>
                 <Label id="LabelsiteNameChosen" text="{i18n>siteName}"/>
                 <Text id="siteNameChosen" text=" "/>
+                <Label id="LabelexternalIdChosen" text="{i18n>externalId}"/>
+                <Text id="externalIdChosen" text=""/>
                 <Label id="LabelsiteTypeChosen" text="{i18n>siteType}"/>
                 <Text id="siteTypeChosen" text=""/>
                 <Label id="LabelmeterChosen" text="{i18n>meter}"/>
@@ -682,8 +527,6 @@ xmlns="sap.m">
                 <Text id="accountChosen" text=""/>
                 <Label id="LabelcompanyDivisionChosen" text="{i18n>companyDivision}"/>
                 <Text id="companyDivisionChosen" text=""/>
-                <Label id="LabelcorporationChosen" text="{i18n>corpotation}"/>
-                <Text id="corporationChosen" text=""/>
                 <Label id="LabelsiteBusinessUnitChosen" text="{i18n>siteBusinessUnit}"/>
                 <Text id="siteBusinessUnitChosen" text=""/>
                 <Label id="labelsiteFormatChosen" text="{i18n>siteFormat}"/>
@@ -696,12 +539,8 @@ xmlns="sap.m">
                 <Text id="siteFareChosen" text=""/>
                 <Label id="LabelsiteRegionChosen" text="{i18n>region}"/>
                 <Text id="siteRegionChosen" text=""/>
-                <Label id="LabelexternalIdChosen" text="{i18n>externalId}"/>
-                <Text id="externalIdChosen" text=""/>
                 <Label id="LabelsiteCostCenterChosen" text="{i18n>siteCostCenter}"/>
                 <Text id="siteCostCenterChosen" text=" "/>
-                <Label id="LabelsiteCostCenterEgChosen" text="{i18n>siteCostCenterEg}"/>
-                <Text id="siteCostCenterEgChosen" text=" "/>
                 <Label id="LabelsapAccountChosen" text="{i18n>sapAccount}"/>
                 <Text id="sapAccountChosen" text=" "/>
                 <Label id="LabelsupplierChosen" text="{i18n>supplier}"/>
@@ -720,12 +559,6 @@ xmlns="sap.m">
                 <Text id="siteStatusChosen" text=""/>
                 <Label id="LabelsiteContractedDemandChosen" text="{i18n>contractedDemand}"/>
                 <Text id="siteContractedDemandChosen" text=""/>
-                <Label id="LabelsiteCutoffDateChosen" text="{i18n>cutoffDate}"/>
-                <Text id="siteCutoffDateChosen" text=""/>
-                <Label id="LabelsiteMultiplierChosen" text="{i18n>multiplier}"/>
-                <Text id="siteMultiplierChosen" text=""/>
-                <Label id="LabelsiteManagerChosen" text="{i18n>manager}"/>
-                <Text id="siteManagerChosen" text=""/>
                 <Label id="LabelconstructedAreaChosen" text="{i18n>constructedAreaLabel}"/>
                 <Text id="constructedAreaChosen" text=""/>
                 <Link id="_IDGenLinkSI2" press="editStepTwo" text="Editar" />
@@ -753,26 +586,9 @@ xmlns="sap.m">
                 <Text id="latitudeChosen" text=""/>
                 <Label id="_IDGenLabel29" text="{i18n>longitudeLabel}"/>
                 <Text id="longitudeChosen" text=""/>
+                <Label id="_IDGenLabel30" text="{i18n>addressCFELabel}"/>
+                <Text id="addressCFEChosen" text=""/>
                 <Link id="_IDGenLink2" press="editStepThree" text="Editar" />
-            </form:content>
-        </form:SimpleForm>
-        <form:SimpleForm id="_IDGenSimpleFormCFE" title="4. {i18n>AddressCFEStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
-            <form:content>
-                <Label id="LabelcountryChosen" text="{i18n>countryLabel}"/>
-                <Text id="countryChosenCFE" text=" "/>
-                <Label id="LabelstateChosenCFE" text="{i18n>stateLabel}"/>
-                <Text id="stateChosenCFE" text=""/>
-                <Label id="LabeltownChosenCFE" text="{i18n>townLabel}"/>
-                <Text id="townChosenCFE" text=""/>
-                <Label id="LabelpostalCodeChosenCFE" text="{i18n>postalCodeLabel}"/>
-                <Text id="postalCodeChosenCFE" text=" "/>
-                <Label id="LabelneighborhoodChosenCFE" text="{i18n>neighborhoodLabel}"/>
-                <Text id="neighborhoodChosenCFE" text=""/>
-                <Label id="LabelstreetChosenCFE" text="{i18n>streetLabel}"/>
-                <Text id="streetChosenCFE" text=""/>
-                <Label id="LabelnumberChosenCFE" text="{i18n>numberLabel}"/>
-                <Text id="numberChosenCFE" text=""/>
-                <Link id="_IDGenLinkCFE" press="editStepFour" text="Editar" />
             </form:content>
         </form:SimpleForm>
         <form:SimpleForm id="_IDGenSimpleFormSP6" title="5. {i18n>suppliersStep}" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
