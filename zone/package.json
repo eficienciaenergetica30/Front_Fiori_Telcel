@@ -10,7 +10,7 @@
     ],
     "main": "webapp/index.html",
     "devDependencies": {
-        "@sap/cds-dk": "^7.9.2",
+        "@sap/cds-dk": "^9.0.5",
         "@sap/ui5-builder-webide-extension": "^1.1.7",
         "@sap/ux-ui5-tooling": "^1.13.5",
         "@ui5/cli": "^3.10.3",

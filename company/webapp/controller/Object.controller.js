@@ -79,12 +79,12 @@ sap.ui.define([
                     var businessItems = that.getView().byId("businessActivityComboBox").getItems();
                     var currencyItems = that.getView().byId("currencyComboBox").getItems();
                     businessItems.forEach(function callback(v) {
-                        if (v.mProperties.text == objectInfo.businessActivity) {
+                        if (v.mProperties.text == objectInfo.BusinessActivity) {
 			                that.getView().byId("businessActivityComboBox").setSelectedKey(v.mProperties.key);
                         }
                     }); 
                     currencyItems.forEach(function callback(v) {
-                        if (v.mProperties.text == objectInfo.currency) {
+                        if (v.mProperties.text == objectInfo.Currency) {
 			                that.getView().byId("currencyComboBox").setSelectedKey(v.mProperties.key);
                         }
                     });

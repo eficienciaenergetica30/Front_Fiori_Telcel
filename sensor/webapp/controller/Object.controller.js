@@ -83,8 +83,8 @@ sap.ui.define([
         
             that.getObjectSensors1(sObjectId).then(function(res) {
                 var objectInfo = res[0];
-                sensorTypeName = res[0].sensorType;
-                sensorLocationName = res[0].location;
+                sensorTypeName = res[0].SensorType;
+                sensorLocationName = res[0].Location;
                 siteID = objectInfo.siteID;
         
                 if (objectInfo.parent === 'GATEWAY' || objectInfo.parent === 'SENSOR') {
@@ -112,12 +112,12 @@ sap.ui.define([
                 return that.getSensorType();
             }).then(function(sensorTypeRes) {
                 that.getView().getModel().setProperty("/SensorTypeCollection", sensorTypeRes);
-                that.getView().getModel().setProperty("/SensorTypeID", sensorTypeRes.find(v => v.name === sensorTypeName)?.ID || "");
+                that.getView().getModel().setProperty("/SensorTypeID", sensorTypeRes.find(v => v.Name === sensorTypeName)?.ID || "");
         
                 return that.getSensorLocation();
             }).then(function(sensorLocationRes) {
                 that.getView().getModel().setProperty("/SensorLocationCollection", sensorLocationRes);
-                that.getView().getModel().setProperty("/SensorLocationID", sensorLocationRes.find(v => v.name === sensorLocationName)?.ID || "");
+                that.getView().getModel().setProperty("/SensorLocationID", sensorLocationRes.find(v => v.Name === sensorLocationName)?.ID || "");
 
                 let sensorLocationComboBox = that.getView().byId("sensorLocationComboBox");
                 let oBinding = sensorLocationComboBox.getBinding("items");

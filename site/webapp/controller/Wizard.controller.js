@@ -16,7 +16,6 @@ sap.ui.define([
                 SiteFormatCollection: [],
                 SiteBusinessUnitCollection: [],
                 SiteDivisionCollection: [],
-                SiteRegionCollection: [],
                 SiteStatusCollection: [],
                 SiteElectricSuppliersCollection: [],
                 SiteGasSuppliersCollection: [],
@@ -26,7 +25,6 @@ sap.ui.define([
 				TownCollection: [],
 				PostalCodeCollection: [],
 				NeighborhoodCollection: [],
-                SiteManagerCollection: [],
 			};
             sap.ui.getCore().getConfiguration().setLanguage("es-MX");
 			let oModelEmpty = new JSONModel(emtpyObject);
@@ -83,19 +81,9 @@ sap.ui.define([
                 that.getView().getModel().setProperty("/SiteDivisionCollection", oSiteDivision);
                 sap.ui.core.BusyIndicator.hide();
             });
-            that.getSiteRegion().then(function(res) {
-                let oSiteRegion = res;
-                that.getView().getModel().setProperty("/SiteRegionCollection", oSiteRegion);
-                sap.ui.core.BusyIndicator.hide();
-            });
             that.getSiteStatus().then(function(res) {
                 let oSiteStatus = res;
                 that.getView().getModel().setProperty("/SiteStatusCollection", oSiteStatus);
-                sap.ui.core.BusyIndicator.hide();
-            });
-            that.getSiteManager().then(function(res) {
-                let oSiteManager = res;
-                that.getView().getModel().setProperty("/SiteManagerCollection", oSiteManager);
                 sap.ui.core.BusyIndicator.hide();
             });
             that.getSiteElectricSuppliers().then(function(res) {
@@ -169,22 +157,31 @@ sap.ui.define([
         stepTwoValidation: function() {
             let that = this,
                 aName = that.getView().byId('siteNameInput').getValue(),
+                aExternalId = that.getView().byId('externalIdInput').getValue(),
                 aSiteType = that.getView().byId('siteTypeComboBox').getValue(),
+                aMeter = that.getView().byId('meterInput').getValue(),
                 aAccount = that.getView().byId('accountInput').getValue(),
+                aCompanyDivision = that.getView().byId('companyDivisionInput').getValue(),
                 aSiteBusinessUnit = that.getView().byId('siteBusinessUnitComboBox').getValue(),
                 aSiteFormat = that.getView().byId('siteFormatComboBox').getValue(),
                 aSiteRPU = that.getView().byId('siteRPUInput').getValue(),
                 aSiteDivision = that.getView().byId('siteDivisionComboBox').getValue(),
-                aSiteRegion = that.getView().byId('siteRegionComboBox').getValue(),
+                aSiteRegion = that.getView().byId('siteRegionInput').getValue(),
                 aSiteStatus = that.getView().byId('siteStatusComboBox').getValue(),
-                aSiteManager = that.getView().byId('siteManagerComboBox').getValue(),
-                aSiteCostCenter = that.getView().byId('siteCostCenterInput').getValue(),
-                aSiteCostCenterEg = that.getView().byId('siteCostCenterEgInput').getValue();
+                aSiteContractedDemand = that.getView().byId('siteContractedDemandInput').getValue();
+
+            let isValidInteger = !(aSiteContractedDemand === "" || isNaN(aSiteContractedDemand) || aSiteContractedDemand % 1 !== 0);
 
             if(aName.length < 4) {
                 that.model.setProperty("/siteNameState","Error");
             } else {
                 that.model.setProperty("/siteNameState","None");
+            }
+
+            if(aExternalId == "") {
+                that.model.setProperty("/externalIdState","Error");
+            } else {
+                that.model.setProperty("/externalIdState","None");
             }
 
             if(aSiteType == "") {
@@ -193,10 +190,22 @@ sap.ui.define([
                 that.model.setProperty("/siteTypeState","None");
             }
 
+            if(aMeter == "") {
+                that.model.setProperty("/meterState","Error");
+            } else {
+                that.model.setProperty("/meterState","None");
+            }
+
             if(aAccount.length < 16) {
                 that.model.setProperty("/accountState","Error");
             } else {
                 that.model.setProperty("/accountState","None");
+            }
+
+            if(aCompanyDivision == "") {
+                that.model.setProperty("/companyDivisionState","Error");
+            } else {
+                that.model.setProperty("/companyDivisionState","None");
             }
 
             if(aSiteBusinessUnit == "") {
@@ -229,31 +238,19 @@ sap.ui.define([
                 that.model.setProperty("/siteRegionState","None");
             }
 
-            if(aSiteCostCenter.length < 4) {
-                that.model.setProperty("/siteCostCenterState","Error");
-            } else {
-                that.model.setProperty("/siteCostCenterState","None");
-            }
-
-            if(aSiteCostCenterEg.length < 4) {
-                that.model.setProperty("/siteCostCenterEgState","Error");
-            } else {
-                that.model.setProperty("/siteCostCenterEgState","None");
-            }
-
             if(aSiteStatus == "") {
                 that.model.setProperty("/siteStatusState","Error");
             } else {
                 that.model.setProperty("/siteStatusState","None");
             }
 
-            if(aSiteManager == "") {
-                that.model.setProperty("/siteManagerState","Error");
+            if (!isValidInteger) {
+                that.model.setProperty("/siteContractedDemandState","Error");
             } else {
-                that.model.setProperty("/siteManagerState","None");
+                that.model.setProperty("/siteContractedDemandState","None");
             }
 
-            if(aName.length < 4 || aSiteType == "" || aAccount.length < 16 || aSiteBusinessUnit == "" || aSiteFormat == "" || aSiteRPU.length < 12 || aSiteDivision == "" || aSiteRegion == "" || aSiteCostCenter.length < 4 || aSiteCostCenterEg.length < 4 || aSiteStatus == "" || aSiteManager == "") {
+            if(aName.length < 4 || aSiteType == "" || aMeter == "" || aAccount.length < 16 || aCompanyDivision == "" || aSiteBusinessUnit == "" || aSiteFormat == "" || aSiteRPU.length < 12 || aSiteDivision == "" || aSiteRegion == "" || aSiteStatus == "" || !isValidInteger) {
                 this._wizard.invalidateStep(this.byId("SiteInfoStep"));
             } else {
                 this._wizard.validateStep(this.byId("SiteInfoStep"));
@@ -337,87 +334,6 @@ sap.ui.define([
                 this._wizard.invalidateStep(this.byId("AddressStep"));
             } else {
                 this._wizard.validateStep(this.byId("AddressStep"));
-            }
-
-        },
-
-        stepCFEAddressValidation: function() {
-            let that = this,
-                aCountry      = that.getView().byId('countryComboBoxCFE').getValue(),
-                aState        = that.getView().byId('stateComboBoxCFE').getValue(),
-                aTown         = that.getView().byId('townComboBoxCFE').getValue(),
-                aPostalCode   = that.getView().byId('postalCodeComboBoxCFE').getValue(),
-                aNeighborhood = that.getView().byId('neighborhoodComboBoxCFE').getValue(),
-                aStreet       = that.getView().byId('streetInputCFE').getValue(),
-                aExtNumber    = that.getView().byId('numberInputCFE').getValue();
-                
-
-            if(aCountry == "") {
-                that.model.setProperty("/countryStateCFE","Error");
-            } else {
-                that.model.setProperty("/countryStateCFE","None");
-            }
-
-            if(aState == "") {
-                that.model.setProperty("/stateStateCFE","Error");
-                if(aCountry != ""){
-                    return new Promise(function(fnResolve, fnReject) {
-                        fnResolve(that.selectedCountry());
-                    });
-                }
-            } else {
-                that.model.setProperty("/stateStateCFE","None");
-            }
-
-            if(aTown == "") {
-                that.model.setProperty("/townStateCFE","Error");
-                if(aCountry != ""){
-                    return new Promise(function(fnResolve, fnReject) {
-                        fnResolve(that.selectedState());
-                    });
-                }
-            } else {
-                that.model.setProperty("/townStateCFE","None");
-            }
-
-            if(aPostalCode == "") {
-                that.model.setProperty("/postalCodeStateCFE","Error");
-                if(aTown != ""){
-                    return new Promise(function(fnResolve, fnReject) {
-                        fnResolve(that.selectedTown());
-                    });
-                }
-            } else {
-                that.model.setProperty("/postalCodeStateCFE","None");
-            }
-
-            if(aNeighborhood == "") {
-                that.model.setProperty("/neighborhoodStateCFE","Error");
-                if(aPostalCode != ""){
-                    return new Promise(function(fnResolve, fnReject) {
-                        fnResolve(that.selectedPostalCode());
-                    });
-                }
-            } else {
-                that.model.setProperty("/neighborhoodStateCFE","None");
-            }
-
-            if(aStreet.length < 4) {
-                that.model.setProperty("/streetStateCFE","Error");
-            } else {
-                that.model.setProperty("/streetStateCFE","None");
-            }
-
-            if(aExtNumber.length < 1) {
-                that.model.setProperty("/extNumberStateCFE","Error");
-            } else {
-                that.model.setProperty("/extNumberStateCFE","None");
-            }
-
-            if(aCountry == "" || aState == "" || aTown == "" || aPostalCode == "" || aNeighborhood == "" || aStreet.length < 4 || aExtNumber.length < 1) {
-                this._wizard.invalidateStep(this.byId("AddressCFEStep"));
-            } else {
-                this._wizard.validateStep(this.byId("AddressCFEStep"));
             }
 
         },
@@ -724,12 +640,10 @@ sap.ui.define([
                         that.byId("siteFormatChosen").setText(data.Format),
                         that.byId("siteRPUChosen").setText(data.RPU),
                         that.byId("siteDivisionChosen").setText(data.Division),
-                        that.byId("corporationChosen").setText(data.Corporation),
                         that.byId("siteFareChosen").setText(data.Fare),
                         that.byId("siteRegionChosen").setText(data.Region),
                         that.byId("externalIdChosen").setText(data.ExternalId),
                         that.byId("siteCostCenterChosen").setText(data.CostCenter),
-                        that.byId("siteCostCenterEgChosen").setText(data.CostCenterEg),
                         that.byId("sapAccountChosen").setText(data.SapAccount),
                         that.byId("supplierChosen").setText(data.Supplier),
                         that.byId("folio1Chosen").setText(data.Folio1),
@@ -738,11 +652,8 @@ sap.ui.define([
                         that.byId("openHourChosen").setText(data.OpenHour),
                         that.byId("closeHourChosen").setText(data.CloseHour),
                         that.byId("siteStatusChosen").setText(data.Status),
-                        that.byId("siteManagerChosen").setText(data.Manager),
                         that.byId("constructedAreaChosen").setText(data.ConstructedArea),
                         that.byId("siteContractedDemandChosen").setText(data.ContractedDemand),
-                        that.byId("siteCutoffDateChosen").setText(data.CutoffDate),
-                        that.byId("siteMultiplierChosen").setText(data.Multiplier),
                         that.byId("countryChosen").setText(data.Address.Country),
                         that.byId("stateChosen").setText(data.Address.State),
                         that.byId("townChosen").setText(data.Address.Town),
@@ -751,16 +662,9 @@ sap.ui.define([
                         that.byId("streetChosen").setText(data.Address.Street),
                         that.byId("numberChosen").setText(data.Address.ExtNumber),
                         that.byId("intNumberChosen").setText(data.Address.IntNumber),
-                        that.byId("countryChosenCFE").setText(data.AddressCFE.Country),
-                        that.byId("stateChosenCFE").setText(data.AddressCFE.State),
-                        that.byId("townChosenCFE").setText(data.AddressCFE.Town),
-                        that.byId("postalCodeChosenCFE").setText(data.AddressCFE.PostalCode),
-                        that.byId("neighborhoodChosenCFE").setText(data.AddressCFE.Neighborhood),
-                        that.byId("streetChosenCFE").setText(data.AddressCFE.Street),
-                        that.byId("numberChosenCFE").setText(data.AddressCFE.ExtNumber),
-                        that.byId("intNumberChosenCFE").setText(data.AddressCFE.IntNumber),
                         that.byId("latitudeChosen").setText(data.Address.Latitude),
                         that.byId("longitudeChosen").setText(data.Address.Longitude),
+                        that.byId("addressCFEChosen").setText(data.AddressCFE),
                         that.byId("electricSupplierChosen").setText(data.ElectricSupplier[0]),
                         that.byId("gasSupplierChosen").setText(data.GasSupplier[0]),
                         that.byId("waterSupplierChosen").setText(data.WaterSupplier[0]),

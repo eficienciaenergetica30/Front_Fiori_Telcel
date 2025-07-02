@@ -90,8 +90,8 @@ sap.ui.define([
                 })
                 .then(function ([companies, siteStatus]) {
                     let oCompanies = companies;
-                    let companyId = that.getView().getModel('SiteInfo').getData().companyID;
-                    let status = that.getView().getModel('SiteInfo').getData().status;
+                    let companyId = that.getView().getModel('SiteInfo').getData().CompanyID;
+                    let status = that.getView().getModel('SiteInfo').getData().Status;
                     let oComboBox = that.getView().byId("friendlyName");
         
                     that.getView().getModel().setProperty("/CompanyCollection", oCompanies);
